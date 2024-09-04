@@ -1,0 +1,11 @@
+.form-container{
+    border-style: dotted;
+    display: flex;
+    flex-wrap: wrap;
+
+    .block {
+        margin: auto;
+        width: 50%;
+        height: 100vh;
+    }
+}

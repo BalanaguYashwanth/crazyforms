@@ -1,0 +1,21 @@
+{
+ "name": "crazyforms",
+ "private": true,
+ "workspaces": [
+  "apps/frontend/*",
+  "apps/backend/*",
+  "packages/*"
+ ],
+ "scripts": {
+  "dev": "concurrently \"yarn workspace forms-app dev\" \"yarn workspace forms_service start:dev\""
+ },
+ "packageManager": "yarn@3.6.4",
+ "dependencies": {
+  "@nestjs/cli": "^10.4.5",
+  "@nestjs/config": "^3.2.3",
+  "@quillforms/react-renderer-utils": "^5.11.0"
+ },
+ "devDependencies": {
+  "concurrently": "^8.2.2"
+ }
+}
