@@ -108,3 +108,13 @@ export const blocks = [
       }
     }
   ]
+
+export const newContentBlockObject = {
+    blockKey: 0,
+    name: "short-text",
+    id: "kd12edg",
+    attributes: {
+      required: false,
+      label: 'Untitled text'
+    }
+  }

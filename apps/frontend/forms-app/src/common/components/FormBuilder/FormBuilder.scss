@@ -12,6 +12,19 @@
         flex-direction: column;
     }
 
+    .builder-block-child{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        div{
+            margin:auto 20px;
+            *{
+                margin: 1px;
+            }
+        }
+    }
+
     .add-button{
         align-self: center;
         border-radius: 100vw;
@@ -21,6 +34,12 @@
         background-color: var(--clr-white);
         border: 1px solid var(--clr-black);
         margin: 10px;
+    }
+
+    .submit-button{
+        align-self: center;
+        width: 80px;
+        font-size: 1.5rem;
     }
 
     .input-block{
