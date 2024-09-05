@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FormModule } from './form/form.module';
 import { UserModule } from './user/user.module';
+import { QuestionModule } from './question/question.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { UserModule } from './user/user.module';
     }),
     FormModule,
     UserModule,
+    QuestionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -12,13 +12,10 @@ registerCoreBlocks()
 
 const Forms = () => {
   const [blockIndex, setBlockIndex] = useState(0);
-
-  const [contentBlock, setContentBlock] = useState([
-    { ...newContentBlockObject },
-  ]);
+  const newBlock = JSON.parse(JSON.stringify(newContentBlockObject))
+  const [contentBlock, setContentBlock] = useState([newBlock]);
 
   const addContentBlock = () => {
-    const newBlock = JSON.parse(JSON.stringify(newContentBlockObject))
     newBlock.blockKey = contentBlock.length;
     setContentBlock([...contentBlock, newBlock]);
     setBlockIndex(contentBlock.length)

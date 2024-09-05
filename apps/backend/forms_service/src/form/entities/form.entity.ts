@@ -1,12 +1,14 @@
+import { Question } from 'src/question/entities/question.entity';
+import { User } from 'src/user/entities/user.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
-import { User } from './user.entity';
-import { Question } from './question.entity';
 
 @Entity({ name: 'form' })
 export class Form {
@@ -36,4 +38,10 @@ export class Form {
 
   @Column('jsonb')
   payment: any;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

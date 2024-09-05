@@ -1,3 +1,4 @@
+import { createQuestions } from '../../api.service';
 import { FormBuilderProps } from '../../types';
 import './FormBuilder.scss'
 
@@ -8,8 +9,12 @@ const FormBuilder = ({
     handleRadioBox
 }: FormBuilderProps) => {
 
-    const handleSubmitForm = () => {
-        console.log('content--->', contentBlock);
+    const handleSubmitForm = async () => {
+        try {
+            await createQuestions({formId:6, questions: contentBlock});
+        } catch (err) {
+            console.log('err--->', err)
+        }
     }
 
     return (

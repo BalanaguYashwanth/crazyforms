@@ -1,6 +1,13 @@
 import { Max, Min } from 'class-validator';
 import { Form } from 'src/form/entities/form.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 //todo - google auth info
 @Entity({ name: 'user' })
@@ -30,4 +37,10 @@ export class User {
 
   @OneToMany(() => Form, (form) => form.user)
   forms: Form[];
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

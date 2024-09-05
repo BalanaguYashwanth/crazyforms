@@ -1,12 +1,15 @@
+import { Form } from 'src/form/entities/form.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Form } from './form.entity';
 
 @Entity({ name: 'question' })
 export class Question {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Form, (form) => form.questions)
+  @Column({ type: 'text', nullable: false })
+  questionId: string;
+
+  @ManyToOne(() => Form, (form) => form.questions, { nullable: false })
   form: Form;
 
   @Column()
