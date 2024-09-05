@@ -7,3 +7,12 @@ export const createQuestions = (data: unknown) => {
         body: JSON.stringify(data),
     })
 }
+
+export const fetchQuestionsByFormId = (data: unknown) => {
+    return fetch(`http://localhost:3000/question/id=${data?.id}`, {
+        method: 'GET',
+        headers:{
+            "Content-Type": "application/json",
+        },
+    })
+}

@@ -118,3 +118,7 @@ export const newContentBlockObject = {
       label: 'Untitled text'
     }
   }
+
+export const REDIRECTION_ROUTES = {
+  'FORM': '/form'
+}

@@ -27,8 +27,13 @@ export class QuestionService {
     return `This action returns all question`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} question`;
+  async findOne(id: any) {
+    const forms = await this.questionRepository.find({ where: { form: id } });
+    const restructuredForm = forms.map((form, index) => ({
+      ...form,
+      id: `${index}${form.questionId}`,
+    }));
+    return restructuredForm;
   }
 
   update(id: number, updateQuestionDto: UpdateQuestionDto) {

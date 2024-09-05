@@ -6,13 +6,13 @@ import FormBuilder from "../../common/components/FormBuilder/FormBuilder";
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
 import { newContentBlockObject } from "../../common/constants";
 import { handleChangeContentProps, handleRadioBoxProps } from "../../common/types";
-import './Forms.scss'
+import './EditForm.scss'
 import "@quillforms/renderer-core/build-style/style.css";
 registerCoreBlocks()
 
-const Forms = () => {
-  const [blockIndex, setBlockIndex] = useState(0);
+const EditForm = () => {
   const newBlock = JSON.parse(JSON.stringify(newContentBlockObject))
+  const [blockIndex, setBlockIndex] = useState(0);
   const [contentBlock, setContentBlock] = useState([newBlock]);
 
   const addContentBlock = () => {
@@ -81,4 +81,4 @@ const Forms = () => {
   )
 }
 
-export default Forms;
+export default EditForm;
