@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FormModule } from './form/form.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -20,10 +21,11 @@ import { FormModule } from './form/form.module';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         entities: [join(process.cwd(), 'dist/**/*.entity.js')],
-        synchronize: true,
+        // synchronize: true,
       }),
     }),
     FormModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

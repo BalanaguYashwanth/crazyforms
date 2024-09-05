@@ -1,8 +1,8 @@
 import { Max, Min } from 'class-validator';
+import { Form } from 'src/form/entities/form.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Form } from './form.entity';
 
-//todo - google auth credentials
+//todo - google auth info
 @Entity({ name: 'user' })
 export class User {
   @PrimaryGeneratedColumn()
@@ -19,7 +19,10 @@ export class User {
   @Column()
   email: string;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: ['M', 'F'],
+  })
   gender: string;
 
   @Column({ type: 'text', nullable: true })
