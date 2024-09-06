@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { QuestionService } from './question.service';
-import { CreateQuestionDto } from './dto/create-question.dto';
+import { CreateAnswerDto, CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 
 @Controller('question')
@@ -18,6 +18,11 @@ export class QuestionController {
   @Post()
   upsert(@Body() createQuestionDto: CreateQuestionDto) {
     return this.questionService.upsert(createQuestionDto);
+  }
+
+  @Post('answers')
+  createAnswers(@Body() createAnswerDto: CreateAnswerDto[]) {
+    return this.questionService.createAnswers(createAnswerDto);
   }
 
   @Get()

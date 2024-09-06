@@ -1,16 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateQuestionDto } from './dto/create-question.dto';
+import { CreateAnswerDto, CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { Question } from './entities/question.entity';
+import { Answer } from './entities/answer.entity';
 
 @Injectable()
 export class QuestionService {
   constructor(
     @InjectRepository(Question)
     private readonly questionRepository: Repository<Question>,
+    @InjectRepository(Answer)
+    private readonly answerRepository: Repository<Answer>,
   ) {}
+
   upsert(createQuestionDto: CreateQuestionDto) {
     const { formId, questions } = createQuestionDto;
     const updatedQuestions = questions.map(({ id, key, ...question }) => ({
@@ -34,6 +38,10 @@ export class QuestionService {
       id: `${index}${form.questionId}`,
     }));
     return restructuredForm;
+  }
+
+  createAnswers(createAnswerDto: CreateAnswerDto[]) {
+    return this.answerRepository.save(createAnswerDto);
   }
 
   updateOne(id: number, updateQuestionDto: UpdateQuestionDto) {

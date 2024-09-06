@@ -1,5 +1,6 @@
 import { Max, Min } from 'class-validator';
 import { Form } from 'src/form/entities/form.entity';
+import { Answer } from 'src/question/entities/answer.entity';
 import {
   Column,
   CreateDateColumn,
@@ -37,6 +38,9 @@ export class User {
 
   @OneToMany(() => Form, (form) => form.user)
   forms: Form[];
+
+  @OneToMany(() => Answer, (answer) => answer.user)
+  answers: Answer[];
 
   @CreateDateColumn()
   createdAt: Date;

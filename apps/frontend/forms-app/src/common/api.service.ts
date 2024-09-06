@@ -16,3 +16,13 @@ export const fetchQuestionsByFormId = (data: unknown) => {
         },
     })
 }
+
+export const createAnswers = (data: unknown) => {
+    return fetch('http://localhost:3000/question/answers', {
+        method: 'POST',
+        headers:{
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+    })
+}

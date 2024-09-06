@@ -22,3 +22,9 @@ export interface FormAnswersProp {
         value: string
     }
 }
+
+export interface QuestionBlockProps {
+    id: string,
+    attributes: object,
+    key: string
+}

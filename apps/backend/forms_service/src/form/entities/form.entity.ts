@@ -1,3 +1,4 @@
+import { Answer } from 'src/question/entities/answer.entity';
 import { Question } from 'src/question/entities/question.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
@@ -18,6 +19,12 @@ export class Form {
   @ManyToOne(() => User, (user) => user.forms, { nullable: false })
   user: User;
 
+  @OneToMany(() => Question, (question) => question.form)
+  questions: Question[];
+
+  @OneToMany(() => Answer, (answer) => answer.form)
+  answers: Answer[];
+
   @Column({ type: 'text', nullable: true, default: null })
   description: string;
 
@@ -32,9 +39,6 @@ export class Form {
 
   @Column({ type: 'text', nullable: true, default: null })
   answerColor: string;
-
-  @OneToMany(() => Question, (question) => question.form)
-  questions: Question[];
 
   @Column('jsonb')
   payment: any;

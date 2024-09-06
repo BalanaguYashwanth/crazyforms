@@ -1,25 +1,36 @@
 import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Form } from "@quillforms/renderer-core";
 import type { FormBlocks } from '@quillforms/types';
-import { FormAnswersProp } from '../../common/types';
-import { createOrUpdateQuestions, fetchQuestionsByFormId } from '../../common/api.service';
+import { FormAnswersProp, QuestionBlockProps } from '../../common/types';
+import { createAnswers, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'
 
 const ViewForm = () => {
-    const [contentBlocks, setContentBlocks] = useState<FormBlocks>([])
+    const formId = 6;
+    const userId = 2;
+    const [contentBlocks, setContentBlocks] = useState([])
 
     const matchQuestionWithAnswers = async (answers: FormAnswersProp) => {
-        const questionWithAnswers = contentBlocks.map((block) => {
-            if(block?.attributes && answers[block.id]){
-                block.attributes.answer = answers[block.id]?.value;
-            }
-            return block
-        })
-        await createOrUpdateQuestions({ formId: 6, questions: questionWithAnswers });
+        try {
+            const questionWithAnswers = contentBlocks.map((block: QuestionBlockProps) => {
+                if (block?.attributes && answers[block.id]) {
+                    return {
+                        answer: answers[block.id].value,
+                        question: block.key,
+                        form: formId,
+                        user: userId,
+                    }
+                }
+            })
+            await createAnswers(questionWithAnswers);
+        } catch {
+            toast.error('Error in submitting, please try again')
+        }
     }
 
     const getQuestionByFormId = async () => {
-        const promiseQuestions = await fetchQuestionsByFormId({ id: 6 });
+        const promiseQuestions = await fetchQuestionsByFormId({ id: formId });
         const questions = await promiseQuestions.json();
         setContentBlocks(questions);
     }
