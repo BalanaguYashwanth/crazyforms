@@ -34,7 +34,7 @@ const EditForm = () => {
 
   return (
     <main className="form-container">
-      <section className="block">
+      <section className="left-block">
         <FormBuilder
           addContentBlock={addContentBlock}
           contentBlock={contentBlock}
@@ -42,7 +42,7 @@ const EditForm = () => {
           handleRadioBox={handleRadioBox}
         />
       </section>
-      <section className="block">
+      <section className="right-block">
         <Form
           applyLogic={false}
           formObj={{

@@ -3,9 +3,15 @@
     display: flex;
     flex-wrap: wrap;
 
-    .block {
+    .left-block {
         margin: auto;
-        width: 50%;
+        width: 40%;
+        height: 100vh;
+    }
+
+    .right-block {
+        margin: auto;
+        width: 60%;
         height: 100vh;
     }
 }

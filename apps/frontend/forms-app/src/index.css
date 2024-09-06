@@ -34,3 +34,8 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.align-self-center{
+  display: flex;
+  align-self: center;
+}

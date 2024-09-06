@@ -41,7 +41,7 @@ export class Form {
   answerColor: string;
 
   @Column('jsonb')
-  payment: any;
+  escrow: any;
 
   @CreateDateColumn()
   createdAt: Date;
