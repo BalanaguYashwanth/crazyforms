@@ -1,4 +1,8 @@
+export interface Object {
+  [key: string]: string;
+}
+
 export class CreateQuestionDto {
   formId: string;
-  questions: Array<string>;
+  questions: Array<Object>;
 }

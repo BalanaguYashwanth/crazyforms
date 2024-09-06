@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateQuestionDto } from './dto/create-question.dto';
-import { UpdateQuestionDto } from './dto/update-question.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateQuestionDto } from './dto/create-question.dto';
+import { UpdateQuestionDto } from './dto/update-question.dto';
 import { Question } from './entities/question.entity';
 
 @Injectable()
@@ -11,32 +11,32 @@ export class QuestionService {
     @InjectRepository(Question)
     private readonly questionRepository: Repository<Question>,
   ) {}
-  create(createQuestionDto: CreateQuestionDto) {
-    const formId = createQuestionDto.formId;
-    const questions = createQuestionDto.questions;
-
-    const updatedQuestions = questions.map(({ id, ...question }: any) => ({
+  upsert(createQuestionDto: CreateQuestionDto) {
+    const { formId, questions } = createQuestionDto;
+    const updatedQuestions = questions.map(({ id, key, ...question }) => ({
       ...question,
       questionId: id,
+      id: key,
       form: formId,
     }));
-    return this.questionRepository.save(updatedQuestions);
+    return this.questionRepository.save(updatedQuestions as unknown);
   }
 
   findAll() {
     return `This action returns all question`;
   }
 
-  async findOne(id: any) {
+  async findByForm(id: any) {
     const forms = await this.questionRepository.find({ where: { form: id } });
     const restructuredForm = forms.map((form, index) => ({
       ...form,
+      key: form.id,
       id: `${index}${form.questionId}`,
     }));
     return restructuredForm;
   }
 
-  update(id: number, updateQuestionDto: UpdateQuestionDto) {
+  updateOne(id: number, updateQuestionDto: UpdateQuestionDto) {
     return `This action updates a #${id} ${updateQuestionDto} question`;
   }
 

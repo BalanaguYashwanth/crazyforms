@@ -16,8 +16,8 @@ export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
   @Post()
-  create(@Body() createQuestionDto: CreateQuestionDto) {
-    return this.questionService.create(createQuestionDto);
+  upsert(@Body() createQuestionDto: CreateQuestionDto) {
+    return this.questionService.upsert(createQuestionDto);
   }
 
   @Get()
@@ -26,16 +26,16 @@ export class QuestionController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.questionService.findOne(+id);
+  findByForm(@Param('id') id: string) {
+    return this.questionService.findByForm(+id);
   }
 
   @Patch(':id')
-  update(
+  updateOne(
     @Param('id') id: string,
     @Body() updateQuestionDto: UpdateQuestionDto,
   ) {
-    return this.questionService.update(+id, updateQuestionDto);
+    return this.questionService.updateOne(+id, updateQuestionDto);
   }
 
   @Delete(':id')

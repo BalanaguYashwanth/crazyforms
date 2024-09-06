@@ -6396,6 +6396,7 @@ __metadata:
     globals: ^15.9.0
     react: ^18.3.1
     react-dom: ^18.3.1
+    react-hot-toast: ^2.4.1
     react-router-dom: ^6.26.1
     sass-embedded: ^1.78.0
     typescript: ^5.5.3
@@ -6729,6 +6730,15 @@ __metadata:
   version: 15.9.0
   resolution: "globals@npm:15.9.0"
   checksum: 32c4470ffcc26db3ddbc579ddf968b74c26462d1a268039980c2fa2e107090fd442a7a7445d953dc4ee874f68846e713066c5a8e63d146fd9349cd1fc5a6f63d
+  languageName: node
+  linkType: hard
+
+"goober@npm:^2.1.10":
+  version: 2.1.14
+  resolution: "goober@npm:2.1.14"
+  peerDependencies:
+    csstype: ^3.0.10
+  checksum: 78978b7192d6a1af5cfbf1fd64b661b5f53ee6c733554b1f1b2ad3e1e2c979847fc080434390647640bb8358c0b193895d0007432c0886d12001f02f8f56b5e6
   languageName: node
   linkType: hard
 
@@ -9384,6 +9394,18 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 298954ecd8f78288dcaece05e88b570014d8f6dce5db6f66e6ee91448debeb59dcd31561dddb354eee47e6c1bb234669459060deb238ed0213497146e555a0b9
+  languageName: node
+  linkType: hard
+
+"react-hot-toast@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "react-hot-toast@npm:2.4.1"
+  dependencies:
+    goober: ^2.1.10
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 3e337816db574782454bf09c63a8aca546bf9c5be3f83d0494d24bdcfd97ca2db64d4c151c4ab0184d2342d7a7226403e6812e70caf03c8b55a07787bb4ad0f2
   languageName: node
   linkType: hard
 

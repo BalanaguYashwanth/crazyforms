@@ -16,3 +16,9 @@ export interface FormBuilderProps {
     addContentBlock: () => void;
     handleRadioBox: ({ contentIndex, text }: handleRadioBoxProps) => void;
 }
+
+export interface FormAnswersProp {
+    [key: string]: {
+        value: string
+    }
+}

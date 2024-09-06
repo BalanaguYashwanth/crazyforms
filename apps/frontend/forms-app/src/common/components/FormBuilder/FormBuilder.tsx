@@ -1,4 +1,5 @@
-import { createQuestions } from '../../api.service';
+import toast, { Toaster } from 'react-hot-toast';
+import { createOrUpdateQuestions } from '../../api.service';
 import { FormBuilderProps } from '../../types';
 import './FormBuilder.scss'
 
@@ -11,14 +12,15 @@ const FormBuilder = ({
 
     const handleSubmitForm = async () => {
         try {
-            await createQuestions({formId:6, questions: contentBlock});
-        } catch (err) {
-            console.log('err--->', err)
+            await createOrUpdateQuestions({formId:6, questions: contentBlock});
+        } catch {
+            toast.error('Error in updating...');
         }
     }
 
     return (
         <main className="form-builder-container">
+            <Toaster />
             {
                 contentBlock.map((block, index) => (
                     <div key={`builder-block-${index}`} className='builder-block'>

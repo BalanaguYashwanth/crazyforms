@@ -1,4 +1,4 @@
-export const createQuestions = (data: unknown) => {
+export const createOrUpdateQuestions = (data: unknown) => {
     return fetch('http://localhost:3000/question', {
         method: 'POST',
         headers:{
