@@ -1,4 +1,5 @@
 import toast, { Toaster } from 'react-hot-toast';
+import Integrations from '../Integrations/Integrations';
 import { createOrUpdateQuestions } from '../../api.service';
 import { FormBuilderProps } from '../../types';
 import './FormBuilder.scss'
@@ -59,14 +60,15 @@ const FormBuilder = ({
                                     <label htmlFor={`required2-${index}`}>False</label>
                                 </div>
                             </div>
-                            <button className='add-button' onClick={addContentBlock}>+</button>
+                           { index == contentBlock.length-1 &&  <button className='add-button' onClick={addContentBlock}>+</button>}
                         </div>
                     ))
                 }
             </section>
-            <button className='submit-button' onClick={handleSubmitForm}>submit</button>
+            <button className='submit-button' onClick={handleSubmitForm}>Save</button>
             <hr className='m16' />
             <h1 className='align-self-center'>Integrations</h1>
+            <Integrations />
         </main>
     )
 }

@@ -3334,6 +3334,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wallet-standard/app@npm:^0.0.0-20240703212708":
+  version: 0.0.0-20240802213516
+  resolution: "@wallet-standard/app@npm:0.0.0-20240802213516"
+  dependencies:
+    "@wallet-standard/base": ^0.0.0-20240802213516
+  checksum: 9a638d62d5a44b022b404b66a5c1fcdd394ec284664451ffa3027d948f9e9f65cf098ef60f83f02bcbc0ba57b50224100197fd0570ea3b38efcb1a59f32fe2dd
+  languageName: node
+  linkType: hard
+
+"@wallet-standard/base@npm:^0.0.0-20240802213516":
+  version: 0.0.0-20240802213516
+  resolution: "@wallet-standard/base@npm:0.0.0-20240802213516"
+  checksum: e117172f5d1d71fcedcf028ebfa9e16c300873f8b0625f5937adba5b254fdb9e36b69e01151414025c8760f2283dd38261d74c0eeda4ce773d5bbb4dd2f9dd98
+  languageName: node
+  linkType: hard
+
+"@wallet-standard/standard@npm:^0.1.0-alpha.5":
+  version: 0.1.0-alpha.5
+  resolution: "@wallet-standard/standard@npm:0.1.0-alpha.5"
+  checksum: 9c686d280bb39beb684f7dde8c1ef72d5a599e6d9e18182661426749be5a119a7e6b17e4e3ac67e79d8e4689324e973672d11e60ebee6be653903419810eba8d
+  languageName: node
+  linkType: hard
+
 "@webassemblyjs/ast@npm:1.12.1, @webassemblyjs/ast@npm:^1.12.1":
   version: 1.12.1
   resolution: "@webassemblyjs/ast@npm:1.12.1"
@@ -6401,6 +6424,8 @@ __metadata:
     "@types/react": ^18.3.3
     "@types/react-dom": ^18.3.0
     "@vitejs/plugin-react": ^4.3.1
+    "@wallet-standard/app": ^0.0.0-20240703212708
+    "@wallet-standard/standard": ^0.1.0-alpha.5
     eslint: ^9.9.0
     eslint-plugin-react-hooks: ^5.1.0-rc.0
     eslint-plugin-react-refresh: ^0.4.9

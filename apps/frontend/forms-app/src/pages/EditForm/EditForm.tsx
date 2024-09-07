@@ -14,10 +14,11 @@ registerCoreBlocks()
 const EditForm = () => {
   const newBlock = JSON.parse(JSON.stringify(newContentBlockObject))
   const [blockIndex, setBlockIndex] = useState(0);
-  const [contentBlock, setContentBlock] = useState([newBlock]);
+  const [contentBlock, setContentBlock] = useState([{...newContentBlockObject}]);
 
   const addContentBlock = () => {
     newBlock.blockKey = contentBlock.length;
+    newBlock.attributes.label = 'Untitled text';
     setContentBlock([...contentBlock, newBlock]);
     setBlockIndex(contentBlock.length)
   }

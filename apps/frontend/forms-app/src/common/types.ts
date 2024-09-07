@@ -32,3 +32,9 @@ export interface QuestionBlockProps {
 export interface ObjectProps{
     [key: string]: string;
 }
+
+export interface IntegrationsProps{
+    disconnect?: () => void;
+    features?: any;
+    accounts?: any;
+}
