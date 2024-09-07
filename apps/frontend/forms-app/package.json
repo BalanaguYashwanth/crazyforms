@@ -12,6 +12,8 @@
   "dependencies": {
     "@quillforms/react-renderer-utils": "^5.11.0",
     "@quillforms/renderer-core": "^5.9.0",
+    "@react-oauth/google": "^0.12.1",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",

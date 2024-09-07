@@ -8,6 +8,7 @@ import { newContentBlockObject } from "../../common/constants";
 import { handleChangeContentProps, handleRadioBoxProps } from "../../common/types";
 import './EditForm.scss'
 import "@quillforms/renderer-core/build-style/style.css";
+import logo from '../../assets/logo.png'
 registerCoreBlocks()
 
 const EditForm = () => {
@@ -51,13 +52,13 @@ const EditForm = () => {
               animationDirection: "vertical",
               disableWheelSwiping: false,
               disableNavigationArrows: false,
-              disableProgressBar: true
+              disableProgressBar: true,
             },
             theme: {
               font: "Roboto",
               buttonsBgColor: "var(--clr-black)",
               logo: {
-                src: ""
+                src: logo
               },
               questionsColor: "#000",
               answersColor: "#525151",
@@ -66,7 +67,7 @@ const EditForm = () => {
               errorsFontColor: "#fff",
               errorsBgColor: "#f00",
               progressBarFillColor: "#000",
-              progressBarBgColor: "#ccc"
+              progressBarBgColor: "#ccc",
             }
           }}
           onSubmit={(data, { completeForm, setIsSubmitting }) => {

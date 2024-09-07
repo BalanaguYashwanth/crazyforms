@@ -28,3 +28,7 @@ export interface QuestionBlockProps {
     attributes: object,
     key: string
 }
+
+export interface ObjectProps{
+    [key: string]: string;
+}

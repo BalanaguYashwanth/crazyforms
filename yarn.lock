@@ -2550,6 +2550,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-oauth/google@npm:^0.12.1":
+  version: 0.12.1
+  resolution: "@react-oauth/google@npm:0.12.1"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: fff63a0fc0b367519b48422c39f6ebc73226e4442ae148d752d05083a185660e66d047fcc8d88b962de97980cfb71f726de0a96ff5f00af0d7e68f333560a7c3
+  languageName: node
+  linkType: hard
+
 "@remix-run/router@npm:1.19.1":
   version: 1.19.1
   resolution: "@remix-run/router@npm:1.19.1"
@@ -6387,6 +6397,7 @@ __metadata:
     "@eslint/js": ^9.9.0
     "@quillforms/react-renderer-utils": ^5.11.0
     "@quillforms/renderer-core": ^5.9.0
+    "@react-oauth/google": ^0.12.1
     "@types/react": ^18.3.3
     "@types/react-dom": ^18.3.0
     "@vitejs/plugin-react": ^4.3.1
@@ -6394,6 +6405,7 @@ __metadata:
     eslint-plugin-react-hooks: ^5.1.0-rc.0
     eslint-plugin-react-refresh: ^0.4.9
     globals: ^15.9.0
+    jwt-decode: ^4.0.0
     react: ^18.3.1
     react-dom: ^18.3.1
     react-hot-toast: ^2.4.1
@@ -7995,6 +8007,13 @@ __metadata:
     graceful-fs:
       optional: true
   checksum: 7af3b8e1ac8fe7f1eccc6263c6ca14e1966fcbc74b618d3c78a0a2075579487547b94f72b7a1114e844a1e15bb00d440e5d1720bfc4612d790a6f285d5ea8354
+  languageName: node
+  linkType: hard
+
+"jwt-decode@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "jwt-decode@npm:4.0.0"
+  checksum: 390e2edcb31a92e86c8cbdd1edeea4c0d62acd371f8a8f0a8878e499390c0ecf4c658b365c4e941e4ef37d0170e4ca650aaa49f99a45c0b9695a235b210154b0
   languageName: node
   linkType: hard
 
