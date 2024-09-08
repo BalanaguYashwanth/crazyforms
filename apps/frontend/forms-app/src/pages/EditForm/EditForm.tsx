@@ -1,20 +1,19 @@
 import { useState } from "react";
-import type { FormBlocks } from '@quillforms/types';
-import { Form } from "@quillforms/renderer-core";
 import FormBuilder from "../../common/components/FormBuilder/FormBuilder";
 // @ts-expect-error: Import not typed correctly
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
+import CustomTypeForm from "../../common/components/CustomTypeForm/CustomTypeForm";
 import { newContentBlockObject } from "../../common/constants";
 import { handleChangeContentProps, handleRadioBoxProps } from "../../common/types";
 import './EditForm.scss'
 import "@quillforms/renderer-core/build-style/style.css";
-import logo from '../../assets/logo.png'
+import { FormBuilderContextProvider } from "../../common/CentralizeStore/FormBuilderContext/FormBuilderContext";
 registerCoreBlocks()
 
 const EditForm = () => {
   const newBlock = JSON.parse(JSON.stringify(newContentBlockObject))
   const [blockIndex, setBlockIndex] = useState(0);
-  const [contentBlock, setContentBlock] = useState([{...newContentBlockObject}]);
+  const [contentBlock, setContentBlock] = useState([{ ...newContentBlockObject }]);
 
   const addContentBlock = () => {
     newBlock.blockKey = contentBlock.length;
@@ -37,46 +36,19 @@ const EditForm = () => {
   return (
     <main className="form-container">
       <section className="left-block">
-        <FormBuilder
-          addContentBlock={addContentBlock}
-          contentBlock={contentBlock}
-          handleChangeContent={handleChangeContent}
-          handleRadioBox={handleRadioBox}
-        />
+        <FormBuilderContextProvider value={{
+          addContentBlock,
+          contentBlock,
+          handleChangeContent,
+          handleRadioBox
+        }}>
+          <FormBuilder />
+        </FormBuilderContextProvider>
       </section>
       <section className="right-block">
-        <Form
-          applyLogic={false}
-          formObj={{
-            blocks: [{ ...contentBlock[blockIndex] }] as FormBlocks,
-            settings: {
-              animationDirection: "vertical",
-              disableWheelSwiping: false,
-              disableNavigationArrows: false,
-              disableProgressBar: true,
-            },
-            theme: {
-              font: "Roboto",
-              buttonsBgColor: "var(--clr-black)",
-              logo: {
-                src: logo
-              },
-              questionsColor: "#000",
-              answersColor: "#525151",
-              buttonsFontColor: "#fff",
-              buttonsBorderRadius: 25,
-              errorsFontColor: "#fff",
-              errorsBgColor: "#f00",
-              progressBarFillColor: "#000",
-              progressBarBgColor: "#ccc",
-            }
-          }}
-          onSubmit={(data, { completeForm, setIsSubmitting }) => {
-            setTimeout(() => {
-              setIsSubmitting(false);
-              completeForm();
-            }, 500);
-          }}
+        <CustomTypeForm
+          blocks={[{ ...contentBlock[blockIndex] }]}
+          disableNavigationArrows={true}
         />
       </section>
     </main>

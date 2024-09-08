@@ -1,0 +1,50 @@
+.step-form-editor {
+    height: 300px;
+    overflow: scroll;
+
+
+    .builder-block {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .builder-block-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        div {
+            margin: auto 20px;
+
+            * {
+                margin: 1px;
+            }
+        }
+    }
+
+    .add-button {
+        align-self: center;
+        border-radius: 100vw;
+        width: 35px;
+        height: 35px;
+        font-size: 1.5rem;
+        background-color: var(--clr-white);
+        border: 1px solid var(--clr-black);
+        margin: 10px;
+    }
+
+    .submit-button {
+        align-self: center;
+        width: 50px;
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+
+
+    .input-block {
+        align-self: center;
+        width: 400px;
+        padding: 1rem;
+    }
+
+}

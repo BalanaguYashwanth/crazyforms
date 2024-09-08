@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { Form } from "@quillforms/renderer-core";
-import type { FormBlocks } from '@quillforms/types';
+import CustomTypeForm from '../../common/components/CustomTypeForm/CustomTypeForm';
 import { FormAnswersProp, QuestionBlockProps } from '../../common/types';
 import { createAnswers, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'
@@ -35,49 +34,27 @@ const ViewForm = () => {
         setContentBlocks(questions);
     }
 
+    const handleSubmit = (data: { answers: FormAnswersProp; }) => {
+        if (data?.answers) {
+            matchQuestionWithAnswers(data.answers)
+        }
+    }
+
     useEffect(() => {
         getQuestionByFormId();
     }, [])
 
     return (
         <main className="view-form-container">
-            {contentBlocks.length > 0 ? <Form
-                applyLogic={false}
-                formObj={{
-                    blocks: contentBlocks as FormBlocks,
-                    settings: {
-                        animationDirection: "vertical",
-                        disableWheelSwiping: false,
-                        disableNavigationArrows: false,
-                        disableProgressBar: true
-                    },
-                    theme: {
-                        font: "Roboto",
-                        buttonsBgColor: "var(--clr-black)",
-                        logo: {
-                            src: ""
-                        },
-                        questionsColor: "#000",
-                        answersColor: "#525151",
-                        buttonsFontColor: "#fff",
-                        buttonsBorderRadius: 25,
-                        errorsFontColor: "#fff",
-                        errorsBgColor: "#f00",
-                        progressBarFillColor: "#000",
-                        progressBarBgColor: "#ccc"
-                    }
-                }}
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                onSubmit={(data: any, { completeForm, setIsSubmitting }) => {
-                    if (data?.answers) {
-                        matchQuestionWithAnswers(data.answers)
-                    }
-                    setTimeout(() => {
-                        setIsSubmitting(false);
-                        completeForm();
-                    }, 500);
-                }}
-            /> : <p>loading...</p>}
+            {
+                contentBlocks.length > 0 ?
+                    <CustomTypeForm
+                        blocks={contentBlocks}
+                        handleSubmitExtraActions={handleSubmit}
+                    />
+                    :
+                    <p>loading...</p>
+            }
         </main>
     )
 }

@@ -1,71 +1,16 @@
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Integrations from '../Integrations/Integrations';
-import { createOrUpdateQuestions } from '../../api.service';
-import { FormBuilderProps } from '../../types';
+import StepFormEditor from '../StepFormEditor/StepFormEditor';
 import './FormBuilder.scss'
 
 //todo - refactoring by seperating components and react context
-const FormBuilder = ({
-    addContentBlock,
-    contentBlock,
-    handleChangeContent,
-    handleRadioBox
-}: FormBuilderProps) => {
-
-    const handleSubmitForm = async () => {
-        try {
-            await createOrUpdateQuestions({ formId: 6, questions: contentBlock });
-        } catch {
-            toast.error('Error in updating...');
-        }
-    }
+const FormBuilder = () => {
 
     return (
         <main className="form-builder-container">
             <Toaster />
             <h1 className='align-self-center'>Form Builder</h1>
-            <section className='step-form-editor'>
-                {
-                    contentBlock.map((block, index) => (
-                        <div key={`builder-block-${index}`} className='builder-block'>
-                            <div className='builder-block-child'>
-                                <input
-                                    autoFocus
-                                    placeholder='Enter the question'
-                                    className='input-block'
-                                    value={block.attributes?.label}
-                                    onChange={(e) => handleChangeContent(
-                                        { contentIndex: index, text: e.target.value }
-                                    )} />
-                                <div>
-                                    <p>Required</p>
-                                    <input
-                                        type="radio"
-                                        id={`required1-${index}`}
-                                        onChange={() => handleRadioBox({ contentIndex: index, text: true })}
-                                        name={`required-${index}`}
-                                        value="true"
-                                        checked={contentBlock[index].attributes?.required == true}
-                                    />
-                                    <label htmlFor={`required1-${index}`}>True</label>
-                                    <br />
-                                    <input
-                                        type="radio"
-                                        id={`required2-${index}`}
-                                        onChange={() => handleRadioBox({ contentIndex: index, text: false })}
-                                        name={`required-${index}`}
-                                        value="false"
-                                        checked={contentBlock[index].attributes?.required == false}
-                                    />
-                                    <label htmlFor={`required2-${index}`}>False</label>
-                                </div>
-                            </div>
-                           { index == contentBlock.length-1 &&  <button className='add-button' onClick={addContentBlock}>+</button>}
-                        </div>
-                    ))
-                }
-            </section>
-            <button className='submit-button' onClick={handleSubmitForm}>Save</button>
+            <StepFormEditor />
             <hr className='m16' />
             <h1 className='align-self-center'>Integrations</h1>
             <Integrations />

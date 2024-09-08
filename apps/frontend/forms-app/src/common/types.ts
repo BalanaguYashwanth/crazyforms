@@ -1,13 +1,10 @@
 import type { FormBlocks } from '@quillforms/types';
+import { ReactNode } from 'react';
 
-export interface handleChangeContentProps {
-    contentIndex: number,
-    text: string,
-}
-
-export interface handleRadioBoxProps{
-    contentIndex: number,
-    text: boolean,
+export interface CustomTypeFormProps{
+    blocks: FormBlocks,
+    disableNavigationArrows?: boolean,
+    handleSubmitExtraActions?: (data: { answers: FormAnswersProp; }) => void
 }
 
 export interface FormBuilderProps {
@@ -23,6 +20,17 @@ export interface FormAnswersProp {
     }
 }
 
+export interface handleChangeContentProps {
+    contentIndex: number,
+    text: string,
+}
+
+export interface handleRadioBoxProps{
+    contentIndex: number,
+    text: boolean,
+}
+
+
 export interface QuestionBlockProps {
     id: string,
     attributes: object,
@@ -37,4 +45,11 @@ export interface IntegrationsProps{
     disconnect?: () => void;
     features?: any;
     accounts?: any;
+}
+
+export interface FormBuilderContextProviderProps {
+    children: ReactNode,
+    value: {
+        [key: string]: any;
+    }
 }

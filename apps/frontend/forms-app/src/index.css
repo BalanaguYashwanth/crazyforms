@@ -39,3 +39,7 @@ a {
   display: flex;
   align-self: center;
 }
+
+.m16 {
+  margin: 1rem;
+}
