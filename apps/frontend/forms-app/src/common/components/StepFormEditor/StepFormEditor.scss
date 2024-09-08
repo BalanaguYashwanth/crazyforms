@@ -33,13 +33,14 @@
         margin: 10px;
     }
 
-    .submit-button {
-        align-self: center;
-        width: 50px;
-        font-size: 1rem;
-        margin-top: 1rem;
+    .input-block-another{
+        margin: 10px;
+        padding: 1rem;
+        width: 400px;
+        text-align: left;
+        display: flex;
+        margin-left: 35px;
     }
-
 
     .input-block {
         align-self: center;
@@ -47,4 +48,8 @@
         padding: 1rem;
     }
 
+}
+
+.submit-button{
+    padding: 2px;
 }

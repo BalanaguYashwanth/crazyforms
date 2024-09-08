@@ -15,6 +15,7 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 export class QuestionController {
   constructor(private readonly questionService: QuestionService) {}
 
+  //createOrUpdateQuestions
   @Post()
   upsert(@Body() createQuestionDto: CreateQuestionDto) {
     return this.questionService.upsert(createQuestionDto);

@@ -31,7 +31,7 @@ export class FormController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFormDto: UpdateFormDto) {
+  update(@Param('id') id: number, @Body() updateFormDto: UpdateFormDto) {
     return this.formService.update(+id, updateFormDto);
   }
 

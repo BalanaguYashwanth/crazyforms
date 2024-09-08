@@ -4,13 +4,14 @@ import EditForm from './pages/EditForm/EditForm'
 import ViewForm from './pages/ViewForm/ViewForm'
 import Home from './pages/Home/Home'
 import Forms from './pages/Forms/Forms'
+import { GOOGLE_CLIENT_ID } from './common/config'
 import { REDIRECTION_ROUTES } from './common/constants'
 
 function App() {
 
   return (
     <GoogleOAuthProvider
-      clientId={''}
+      clientId={GOOGLE_CLIENT_ID}
     >
       <BrowserRouter>
         <Routes>

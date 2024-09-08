@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { fetchForms } from "../../common/api.service";
 import { ObjectProps } from "../../common/types";
+import CustomButton from "../../common/components/CustomButton/CustomButton";
+import { REDIRECTION_ROUTES } from "../../common/constants";
 import './Forms.scss'
 
 const Forms = () => {
+    const navigate = useNavigate();
     const [forms, setForms] = useState([]);
 
     const getForms = async () => {
@@ -12,21 +16,33 @@ const Forms = () => {
         setForms(data);
     }
 
+    const handleSubmit = () => {
+        navigate('/'+REDIRECTION_ROUTES.EDIT_FORM)
+    }
+
+    const handleEdit = () => {
+        alert('This feature is coming soon')
+    }
+
     useEffect(() => {
         getForms()
     }, [])
 
     return (
         <main className="forms-container">
-            <h2 className="m16">Forms</h2>
+            <div className="forms-header">
+                <h1></h1>
+                <h2 className="text-center">Forms</h2>
+                <CustomButton title="Add form" handleSubmit={handleSubmit} />
+            </div>
             <table>
                 <thead>
                     <tr>
                         <th>FormId</th>
                         <th>Title</th>
                         <th>Description</th>
-                        <th>Escrow</th>
                         <th>Created At</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 {
@@ -35,8 +51,10 @@ const Forms = () => {
                             <td> {form.id} </td>
                             <td> {form.title} </td>
                             <td> {form.description} </td>
-                            <td> {'-'} </td>
                             <td> {form.createdAt} </td>
+                            <td className="spacing-between-buttons">
+                                <CustomButton title="Edit" handleSubmit={handleEdit}/>
+                            </td>
                         </tbody>
                     ))
                 }

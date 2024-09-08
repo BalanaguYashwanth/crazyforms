@@ -7,7 +7,7 @@ import { newContentBlockObject } from "../../common/constants";
 import { handleChangeContentProps, handleRadioBoxProps } from "../../common/types";
 import './EditForm.scss'
 import "@quillforms/renderer-core/build-style/style.css";
-import { FormBuilderContextProvider } from "../../common/CentralizeStore/FormBuilderContext/FormBuilderContext";
+import { FormBuilderContextProvider } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
 registerCoreBlocks()
 
 const EditForm = () => {

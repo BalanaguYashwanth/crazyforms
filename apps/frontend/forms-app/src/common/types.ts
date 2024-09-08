@@ -1,5 +1,5 @@
-import type { FormBlocks } from '@quillforms/types';
 import { ReactNode } from 'react';
+import type { FormBlocks } from '@quillforms/types';
 
 export interface CustomTypeFormProps{
     blocks: FormBlocks,
@@ -41,15 +41,21 @@ export interface ObjectProps{
     [key: string]: string;
 }
 
-export interface IntegrationsProps{
-    disconnect?: () => void;
-    features?: any;
-    accounts?: any;
-}
-
 export interface FormBuilderContextProviderProps {
     children: ReactNode,
     value: {
         [key: string]: any;
     }
 }
+
+export interface CustomButtonProps {
+    title: string,
+    handleSubmit:()=>void;
+}
+
+export interface StepFormEditorProps{
+    handleSetFormTitle: (text: string) => void,
+    handleSetFormId : (id: number) => void
+}
+
+export interface IntegrationsProps { formId: number, formTitle: string }

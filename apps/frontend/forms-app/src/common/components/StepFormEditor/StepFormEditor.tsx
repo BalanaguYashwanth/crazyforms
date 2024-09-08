@@ -1,29 +1,40 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { FormBuilderContext } from "../../CentralizeStore/FormBuilderContext/FormBuilderContext";
-import { createOrUpdateQuestions } from "../../api.service";
+import { FormBuilderContext } from "../../centralizeStore/FormBuilderContext/FormBuilderContext";
+import { createForms, createOrUpdateQuestions } from "../../api.service";
+import { StepFormEditorProps } from "../../types";
 import './StepFormEditor.scss'
 
-const StepFormEditor = () => {
+const StepFormEditor = ({handleSetFormId, handleSetFormTitle}: StepFormEditorProps) => {
     const {
         addContentBlock,
         contentBlock,
         handleChangeContent,
         handleRadioBox
     } = useContext(FormBuilderContext) as any;
+    const [formDetails, setFormDetails] = useState({ title: "", description: "", user: JSON.parse(localStorage.getItem('user')|| '')?.id, escrow:{}});
 
     const handleSubmitForm = async () => {
         try {
-            await createOrUpdateQuestions({ formId: 6, questions: contentBlock });
-        } catch {
+            const promise = await createForms(formDetails);
+            const data = await promise.json();
+            const formId = data.raw[0].id;
+            const formName = formDetails.title;
+            await createOrUpdateQuestions({ formId, questions: contentBlock });
+            handleSetFormId(formId)
+            handleSetFormTitle(formName)
+        } catch(err) {
+            console.log('err--->', err)
             toast.error('Error in updating...');
         }
     }
 
     return (
-        <main>
+        <main className="text-center">
             <Toaster />
             <section className='step-form-editor'>
+                <input className='input-block-another' placeholder="Title" required onChange={(e) => setFormDetails({  ...formDetails, title: e.target.value, })} />
+                <input className='input-block-another' placeholder="Description" required onChange={(e) => setFormDetails({ ...formDetails, description: e.target.value })} />
                 {
                     contentBlock.map((block: any, index: number) => (
                         <div key={`builder-block-${index}`} className='builder-block'>

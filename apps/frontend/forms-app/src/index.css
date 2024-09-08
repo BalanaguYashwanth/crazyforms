@@ -17,11 +17,11 @@
 }
 
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-};
+}
 
 html,
 body {
@@ -35,11 +35,15 @@ a {
   text-decoration: none;
 }
 
-.align-self-center{
+.align-self-center {
   display: flex;
   align-self: center;
 }
 
 .m16 {
   margin: 1rem;
+}
+
+.text-center {
+  text-align: center;
 }

@@ -28,7 +28,7 @@ export class Form {
   @Column({ type: 'text', nullable: true, default: null })
   description: string;
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'text' })
   title: string;
 
   @Column({ type: 'text', nullable: true, default: null })
@@ -41,7 +41,7 @@ export class Form {
   answerColor: string;
 
   @Column('jsonb')
-  escrow: any;
+  escrow: { [key: string]: string | number };
 
   @CreateDateColumn()
   createdAt: Date;

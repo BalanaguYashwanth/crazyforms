@@ -11,8 +11,14 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
   ) {}
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.insert(createUserDto);
+  async create(createUserDto: CreateUserDto) {
+    const data = await this.userRepository.findOne({
+      where: { email: createUserDto?.email },
+    });
+    if (!data) {
+      return this.userRepository.insert(createUserDto);
+    }
+    return data;
   }
 
   findAll() {

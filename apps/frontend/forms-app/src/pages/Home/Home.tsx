@@ -3,21 +3,23 @@ import { jwtDecode } from "jwt-decode";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google"
 import { createUser } from "../../common/api.service";
 import { REDIRECTION_ROUTES } from '../../common/constants';
+import './Home.scss'
 
 const Home = () => {
     const navigate = useNavigate();
 
     const handleSuccessLogin = async (credentialResponse: CredentialResponse) => {
         const decoded = jwtDecode(credentialResponse?.credential || 'undefined');
-        const { picture, email, given_name } = decoded as { given_name: string, email: string, picture: string };
-        await createUser({
+        const { email, given_name } = decoded as { given_name: string, email: string, picture: string };
+        const promise = await createUser({
             name: given_name,
             email,
             gender: 'F',
             age: '35',
         });
-        localStorage.setItem('user', JSON.stringify({ name: given_name, email, picture }))
-        navigate(REDIRECTION_ROUTES.EDIT_FORM);
+        const data = await promise.json()
+        localStorage.setItem('user', JSON.stringify({ ...data}))
+        navigate(REDIRECTION_ROUTES.FORMS);
     }
 
     const handleErrorLogin = () => {
@@ -25,8 +27,8 @@ const Home = () => {
     }
 
     return (
-        <main>
-            <h1>Home</h1>
+        <main className='home-container'>
+            <h1>CrazyForms</h1>
             <GoogleLogin
                 onSuccess={handleSuccessLogin}
                 onError={handleErrorLogin}

@@ -1,14 +1,26 @@
 .forms-container {
-
+    margin: 1rem;
     table,
     td,
     th {
         border: 1px solid;
+        padding: 5px;
     }
 
     table {
         text-align: center;
         width: 100%;
         border-collapse: collapse;
+    }
+
+    .forms-header{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+    .spacing-between-buttons *{
+        margin: 3px;
     }
 }

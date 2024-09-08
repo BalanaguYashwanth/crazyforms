@@ -24,7 +24,10 @@ export class FormService {
   }
 
   update(id: number, updateFormDto: UpdateFormDto) {
-    return `This action updates a #${id} form ${updateFormDto}`;
+    return this.formRepository.update(
+      { id },
+      { escrow: { id: updateFormDto.escrowId } },
+    );
   }
 
   remove(id: number) {
