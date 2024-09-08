@@ -31,7 +31,12 @@ export class QuestionService {
   }
 
   async findByForm(id: any) {
-    const forms = await this.questionRepository.find({ where: { form: id } });
+    const forms = await this.questionRepository
+      .createQueryBuilder('question')
+      .innerJoinAndSelect('question.form', 'form')
+      .where('form.id = :id', { id: Number(id) })
+      .getMany();
+
     const restructuredForm = forms.map((form, index) => ({
       ...form,
       key: form.id,

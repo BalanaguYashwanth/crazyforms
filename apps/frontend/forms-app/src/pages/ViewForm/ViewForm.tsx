@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { decodeString } from '../../common/encodingDecoding';
 import CustomTypeForm from '../../common/components/CustomTypeForm/CustomTypeForm';
 import { FormAnswersProp, QuestionBlockProps } from '../../common/types';
 import { createAnswers, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'
 
 const ViewForm = () => {
-    const formId = 6;
+    const { id } = useParams();
+    const [formId, setFormId] = useState(0);
     const userId = 2;
     const [contentBlocks, setContentBlocks] = useState([])
 
@@ -28,21 +31,27 @@ const ViewForm = () => {
         }
     }
 
-    const getQuestionByFormId = async () => {
-        const promiseQuestions = await fetchQuestionsByFormId({ id: formId });
-        const questions = await promiseQuestions.json();
-        setContentBlocks(questions);
-    }
-
     const handleSubmit = (data: { answers: FormAnswersProp; }) => {
         if (data?.answers) {
             matchQuestionWithAnswers(data.answers)
         }
     }
 
+    const fetchQuestions = async (id: number) => {
+        if (id) {
+            const promiseResponse = await fetchQuestionsByFormId({ id })
+            const blocks = await promiseResponse.json();
+            setContentBlocks(blocks);
+        }
+    }
+
     useEffect(() => {
-        getQuestionByFormId();
-    }, [])
+        if (id) {
+            const formUID = decodeString(id)
+            setFormId(Number(formUID))
+            fetchQuestions(formUID)
+        }
+    }, [id])
 
     return (
         <main className="view-form-container">

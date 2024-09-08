@@ -8,8 +8,8 @@ export const createOrUpdateQuestions = (data: unknown) => {
     })
 }
 
-export const fetchQuestionsByFormId = (data: {id: string}) => {
-    return fetch(`http://localhost:3000/question/id=${data?.id}`, {
+export const fetchQuestionsByFormId = (data: {id: number}) => {
+    return fetch(`http://localhost:3000/question/${data?.id}`, {
         method: 'GET',
         headers:{
             "Content-Type": "application/json",

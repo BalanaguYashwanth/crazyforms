@@ -33,7 +33,7 @@ export class QuestionController {
 
   @Get(':id')
   findByForm(@Param('id') id: string) {
-    return this.questionService.findByForm(+id);
+    return this.questionService.findByForm(id);
   }
 
   @Patch(':id')

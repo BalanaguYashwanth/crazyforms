@@ -120,6 +120,7 @@ export const newContentBlockObject = {
   }
 
 export const REDIRECTION_ROUTES = {
+  FORM: 'form',
   FORMS: 'forms',
   EDIT_FORM: 'form/edit',
   VIEW_FORM: 'form/:id',

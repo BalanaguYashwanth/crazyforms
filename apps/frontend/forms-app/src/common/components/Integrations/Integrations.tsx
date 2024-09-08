@@ -7,6 +7,7 @@ import { IntegrationsProps } from "../../types";
 import './Integrations.scss'
 
 const Integrations = ({ formId, formTitle }: IntegrationsProps) => {
+  const [escrowId, setEscrowId] = useState('');
   const [form, setForm] = useState({ budget: 0, cpr: 0, coinAddress: "" });
   const { wallets, selectedWallet, accounts, connectWallet } = useWallet();
 
@@ -31,6 +32,7 @@ const Integrations = ({ formId, formTitle }: IntegrationsProps) => {
       };
       const tx = await createSuiEscrow(selectedWallet, escrowParams);
       const escrowId = getCampaignObjectAddress(tx.effects?.created)
+      setEscrowId(escrowId)
       await updateForms({ id: formId, escrowId })
       toast.success('success')
     } catch (err) {
@@ -43,7 +45,7 @@ const Integrations = ({ formId, formTitle }: IntegrationsProps) => {
     <div className="integrations-container">
       <Toaster />
       <select onChange={(e) => connectWallet(wallets[+e.target.value])}>
-        {wallets.map((wallet:{name: string}, index) => (
+        {wallets.map((wallet: { name: string }, index) => (
           <option key={index} value={index}>
             {wallet.name}
           </option>
@@ -59,6 +61,8 @@ const Integrations = ({ formId, formTitle }: IntegrationsProps) => {
         <br />
       </form>
       <button className="submit-button" onClick={handleSubmit}>Create Escrow</button>
+
+      {escrowId && <p className="m16">Escrow Tx Id - {escrowId} </p>}
     </div>
   );
 };

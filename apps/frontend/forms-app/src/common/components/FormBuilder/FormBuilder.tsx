@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import Integrations from '../Integrations/Integrations';
 import StepFormEditor from '../StepFormEditor/StepFormEditor';
 import './FormBuilder.scss'
+import CustomButton from '../CustomButton/CustomButton';
+import { encodeNumber } from '../../encodingDecoding';
+import { REDIRECTION_ROUTES } from '../../constants';
 
 //todo - refactoring by seperating components and react context
 const FormBuilder = () => {
+    const navigate = useNavigate()
     const [formId, setFormId] = useState(0);
     const [formTitle, setFormTitle] = useState('');
 
@@ -17,14 +22,21 @@ const FormBuilder = () => {
         setFormTitle(text);
     }
 
+    const handlePublish = () => {
+        const encodedURL = encodeNumber(Number(formId));
+        navigate(`/${REDIRECTION_ROUTES.FORM}/${encodedURL}`, );
+    }
+
     return (
         <main className="form-builder-container">
+           
             <Toaster />
             <h1 className='align-self-center margin-top-spacing'>Form Builder</h1>
             <StepFormEditor handleSetFormId={handleSetFormId} handleSetFormTitle={handleSetFormTitle}/>
             <hr className='m16' />
             <h1 className='align-self-center'>Integrations</h1>
             <Integrations formId={formId} formTitle={formTitle} />
+            {formId > 0 && <CustomButton handleSubmit={handlePublish} title='Publish' />}
         </main>
     )
 }
