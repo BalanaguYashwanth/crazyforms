@@ -30,7 +30,18 @@ export class QuestionService {
     return `This action returns all question`;
   }
 
-  async findByForm(id: any) {
+  async findAnswerByFormIdUserId(formId: any, userId: any) {
+    const data = await this.answerRepository
+      .createQueryBuilder('question')
+      .innerJoinAndSelect('question.form', 'form')
+      .innerJoinAndSelect('question.user', 'user')
+      .where('form.id = :formId', { formId: Number(formId) })
+      .andWhere('user.id = :userId', { userId: Number(userId) })
+      .getMany();
+    return { isExists: data.length > 0 ? true : false };
+  }
+
+  async findByForm(id: string) {
     const forms = await this.questionRepository
       .createQueryBuilder('question')
       .innerJoinAndSelect('question.form', 'form')

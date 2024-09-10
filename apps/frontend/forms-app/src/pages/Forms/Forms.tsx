@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { fetchForms } from "../../common/api.service";
-import { ObjectProps } from "../../common/types";
+import { Link, useNavigate } from 'react-router-dom';
+import { encodeNumber } from "../../common/encodingDecoding";
 import CustomButton from "../../common/components/CustomButton/CustomButton";
+import { ObjectProps } from "../../common/types";
 import { REDIRECTION_ROUTES } from "../../common/constants";
+import { fetchForms } from "../../common/api.service";
 import './Forms.scss'
 
 const Forms = () => {
@@ -43,6 +44,7 @@ const Forms = () => {
                         <th>Description</th>
                         <th>Created At</th>
                         <th>Actions</th>
+                        <th>URL</th>
                     </tr>
                 </thead>
                 {
@@ -55,6 +57,7 @@ const Forms = () => {
                             <td className="spacing-between-buttons">
                                 <CustomButton title="Edit" handleSubmit={handleEdit}/>
                             </td>
+                            <td> <Link to={`/${REDIRECTION_ROUTES.FORM}/${encodeNumber(Number(form.id))}`} target="_blank">Link</Link></td>
                         </tbody>
                     ))
                 }

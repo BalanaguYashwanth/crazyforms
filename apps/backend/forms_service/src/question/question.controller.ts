@@ -31,6 +31,14 @@ export class QuestionController {
     return this.questionService.findAll();
   }
 
+  @Get('form/:formId/user/:userId')
+  findByFormIdUserId(
+    @Param('formId') formId: number,
+    @Param('userId') userId: number,
+  ) {
+    return this.questionService.findAnswerByFormIdUserId(formId, userId);
+  }
+
   @Get(':id')
   findByForm(@Param('id') id: string) {
     return this.questionService.findByForm(id);
