@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { decodeString } from '../../common/encodingDecoding';
 import CustomTypeForm from '../../common/components/CustomTypeForm/CustomTypeForm';
-import { FormAnswersProp, QuestionBlockProps } from '../../common/types';
-import { createAnswers, fetchByFormIdUserId, fetchQuestionsByFormId } from '../../common/api.service';
+import { FormAnswersProp, matchQuestionWithAnswersProps, QuestionBlockProps } from '../../common/types';
+import { createAnswers, fetchByFormIdUserId, fetchFormById, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'
 
 const ViewForm = () => {
@@ -20,7 +20,13 @@ const ViewForm = () => {
         return data.isExists;
     }
 
-    const matchQuestionWithAnswers = async (answers: FormAnswersProp) => {
+    const fetchFormDetails = async () => {
+        const dataPromise = await fetchFormById(formId)
+        const data = await dataPromise.json()
+        return data[0].escrow.id;
+    }
+
+    const matchQuestionWithAnswers = async ({ answers, receiverAddress, escrowId }: matchQuestionWithAnswersProps) => {
         try {
             const questionWithAnswers = contentBlocks.map((block: QuestionBlockProps) => {
                 if (block?.attributes && answers[block.id]) {
@@ -32,15 +38,26 @@ const ViewForm = () => {
                     }
                 }
             })
-            await createAnswers(questionWithAnswers);
+            await createAnswers({ answers: questionWithAnswers, receiverAddress, escrowId });
         } catch {
             toast.error('Error in submitting, please try again')
         }
     }
 
-    const handleSubmit = (data: { answers: FormAnswersProp; }) => {
-        if (data?.answers) {
-            matchQuestionWithAnswers(data.answers)
+    const handleSubmit = async (data: { answers: FormAnswersProp; }) => {
+        try {
+            const receiverAddress = window.prompt("Enter your wallet address") || '';
+            const escrowId = await fetchFormDetails()
+            if (data?.answers) {
+                matchQuestionWithAnswers({ answers: data.answers, receiverAddress, escrowId })
+                toast.success('successfully submitted')
+            } else {
+                toast.error('Must fill all answers')
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.success(`Error occured ${error.message} please try again`)
+            }
         }
     }
 

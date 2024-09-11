@@ -59,3 +59,5 @@ export interface StepFormEditorProps{
 }
 
 export interface IntegrationsProps { formId: number, formTitle: string }
+
+export interface matchQuestionWithAnswersProps{ answers: FormAnswersProp, receiverAddress: string, escrowId: string }

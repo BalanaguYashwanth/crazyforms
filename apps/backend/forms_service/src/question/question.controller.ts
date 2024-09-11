@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { QuestionService } from './question.service';
-import { CreateAnswerDto, CreateQuestionDto } from './dto/create-question.dto';
+import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 
 @Controller('question')
@@ -22,8 +22,13 @@ export class QuestionController {
   }
 
   @Post('answers')
-  createAnswers(@Body() createAnswerDto: CreateAnswerDto[]) {
-    return this.questionService.createAnswers(createAnswerDto);
+  createAnswers(@Body() data: any) {
+    const { answers, escrowId, receiverAddress } = data;
+    return this.questionService.createAnswers({
+      answers,
+      escrowId,
+      receiverAddress,
+    });
   }
 
   @Get()

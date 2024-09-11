@@ -46,6 +46,15 @@ export const fetchForms = () => {
     })
 }
 
+export const fetchFormById = (id: number) => {
+    return fetch(`http://localhost:3000/form/${id}`, {
+        method: 'GET',
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+}
+
 export const fetchByFormIdUserId = (data: {userId: number, formId: number}) => {
     return fetch(`http://localhost:3000/question/form/${data.formId}/user/${data.userId}`, {
         method: 'GET',

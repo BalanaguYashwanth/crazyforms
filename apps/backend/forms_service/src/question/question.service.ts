@@ -1,10 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAnswerDto, CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { Question } from './entities/question.entity';
 import { Answer } from './entities/answer.entity';
+import { SUIContract } from './contracts/suiContract';
 
 @Injectable()
 export class QuestionService {
@@ -13,6 +14,7 @@ export class QuestionService {
     private readonly questionRepository: Repository<Question>,
     @InjectRepository(Answer)
     private readonly answerRepository: Repository<Answer>,
+    private suiContract: SUIContract,
   ) {}
 
   upsert(createQuestionDto: CreateQuestionDto) {
@@ -56,8 +58,26 @@ export class QuestionService {
     return restructuredForm;
   }
 
-  createAnswers(createAnswerDto: CreateAnswerDto[]) {
-    return this.answerRepository.save(createAnswerDto);
+  async createAnswers({
+    answers,
+    escrowId,
+    receiverAddress,
+  }: {
+    answers: CreateAnswerDto[];
+    escrowId: string;
+    receiverAddress: string;
+  }) {
+    try {
+      await this.suiContract.reward({ escrowId, receiverAddress });
+      return this.answerRepository.save(answers);
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new HttpException(
+          'Failed to create answers',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+    }
   }
 
   updateOne(id: number, updateQuestionDto: UpdateQuestionDto) {

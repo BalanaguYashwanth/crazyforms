@@ -25,3 +25,24 @@ export const createSuiEscrow = async (selectedWallet: string, params: any) => {
   
   return result;
 };
+
+export const reward = async ({escrowId, receiverAddress, contractAddress, selectedWallet}: {escrowId: string, receiverAddress: string, contractAddress: string, selectedWallet: string}) => {
+  const epochTimeSec = Math.floor(Date.now() / 1000);
+  const txb = new TransactionBlock();
+  txb.moveCall({
+    arguments: [
+      txb.pure.u64(epochTimeSec),
+      txb.pure.string(escrowId),
+      txb.pure.address(receiverAddress),
+    ],
+    target: `${contractAddress}::forms_escrow::reward`,
+  });
+  
+  const result = await selectedWallet.features["sui:signAndExecuteTransactionBlock"]
+    .signAndExecuteTransactionBlock({
+      transactionBlock: txb,
+      options: { showEffects: true },
+    });
+  
+  return result;
+}

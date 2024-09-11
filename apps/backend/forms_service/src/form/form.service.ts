@@ -20,7 +20,7 @@ export class FormService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} form`;
+    return this.formRepository.find({ where: { id } });
   }
 
   update(id: number, updateFormDto: UpdateFormDto) {

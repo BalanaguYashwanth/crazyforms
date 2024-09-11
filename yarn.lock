@@ -7342,6 +7342,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "forms_service@workspace:apps/backend/forms_service"
   dependencies:
+    "@mysten/sui": ^1.8.0
     "@nestjs/cli": ^10.0.0
     "@nestjs/common": ^10.0.0
     "@nestjs/core": ^10.0.0
