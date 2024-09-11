@@ -7357,6 +7357,7 @@ __metadata:
     "@types/supertest": ^6.0.0
     "@typescript-eslint/eslint-plugin": ^8.0.0
     "@typescript-eslint/parser": ^8.0.0
+    buffer: ^6.0.3
     class-transformer: ^0.5.1
     class-validator: ^0.14.1
     eslint: ^8.42.0

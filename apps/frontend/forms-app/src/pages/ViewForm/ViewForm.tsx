@@ -1,18 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 import toast, { Toaster } from 'react-hot-toast';
+import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { decodeString } from '../../common/encodingDecoding';
 import CustomTypeForm from '../../common/components/CustomTypeForm/CustomTypeForm';
-import { FormAnswersProp, matchQuestionWithAnswersProps, QuestionBlockProps } from '../../common/types';
-import { createAnswers, fetchByFormIdUserId, fetchFormById, fetchQuestionsByFormId } from '../../common/api.service';
+import { FormAnswersProp, matchQuestionWithAnswersProps, ObjectProps, QuestionBlockProps } from '../../common/types';
+import { createAnswers, createUser, fetchByFormIdUserId, fetchFormById, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'
 
 const ViewForm = () => {
-    const userId = 2;
     const { id } = useParams();
     const [formId, setFormId] = useState(0);
     const [contentBlocks, setContentBlocks] = useState([])
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState<ObjectProps>({});
 
     const getByFormIdUserId = async (formId: number, userId: number) => {
         const dataPromise = await fetchByFormIdUserId({ formId, userId });
@@ -34,7 +36,7 @@ const ViewForm = () => {
                         answer: answers[block.id].value,
                         question: block.key,
                         form: formId,
-                        user: userId,
+                        user: Number(user.userId),
                     }
                 }
             })
@@ -49,8 +51,10 @@ const ViewForm = () => {
             const receiverAddress = window.prompt("Enter your wallet address") || '';
             const escrowId = await fetchFormDetails()
             if (data?.answers) {
-                matchQuestionWithAnswers({ answers: data.answers, receiverAddress, escrowId })
-                toast.success('successfully submitted')
+                toast.loading('Loading');
+                await matchQuestionWithAnswers({ answers: data.answers, receiverAddress, escrowId })
+                toast.dismiss();
+                toast.success('Successfully recieved rewards, please check your wallet')
             } else {
                 toast.error('Must fill all answers')
             }
@@ -79,24 +83,48 @@ const ViewForm = () => {
 
     const checkUserIsExists = useCallback(async (formUID: number) => {
         setLoading(true)
-        const isExists = await getByFormIdUserId(Number(formUID), userId)
+        const isExists = await getByFormIdUserId(Number(formUID), Number(user.userId))
         if (!isExists) {
             await fetchQuestions(formUID)
         } else {
             toast.success('Already submitted the form')
         }
         setLoading(false)
-    }, [])
+    }, [user.userId])
+
+    const handleSuccessLogin = async (credentialResponse: CredentialResponse) => {
+        const decoded = jwtDecode(credentialResponse?.credential || 'undefined');
+        const { email, given_name } = decoded as { given_name: string, email: string, picture: string };
+        const promise = await createUser({
+            name: given_name,
+            email,
+            gender: 'F',
+            age: '35',
+        });
+        const data = await promise.json()
+        setUser({ userId: data?.id })
+        localStorage.setItem('user', JSON.stringify({ ...data }))
+    }
+
+    const handleErrorLogin = () => {
+        alert('failed to login')
+    }
 
     useEffect(() => {
-        if (id) {
+        if (id && user?.userId) {
             const formUID = decodeString(id)
             setFormId(Number(formUID))
             checkUserIsExists(formUID)
         }
-    }, [checkUserIsExists, id])
+    }, [checkUserIsExists, id, user?.userId])
 
-    return (
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('user') && (JSON.parse(localStorage.getItem('user') || '')?.id))) {
+            setUser({ userId: (JSON.parse(localStorage.getItem('user') || '')?.id) })
+        }
+    }, [])
+
+    return user.userId ? (
         <main className="view-form-container">
             <Toaster />
             {
@@ -110,6 +138,14 @@ const ViewForm = () => {
                     :
                     <p>loading...</p>
             }
+        </main>
+    ) : (
+        <main className='center'>
+            <h2> Zk Login</h2>
+            <GoogleLogin
+                onSuccess={handleSuccessLogin}
+                onError={handleErrorLogin}
+            />
         </main>
     )
 }

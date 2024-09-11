@@ -1,5 +1,7 @@
+import { Buffer } from 'buffer';
 import base64url from 'base64-url';
 
+window.Buffer = Buffer;
 export const encodeNumber = (num: number): string => {
   return base64url.encode(num.toString()); // Encodes number to Base64
 };

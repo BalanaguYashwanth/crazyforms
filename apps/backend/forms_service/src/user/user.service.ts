@@ -16,7 +16,8 @@ export class UserService {
       where: { email: createUserDto?.email },
     });
     if (!data) {
-      return this.userRepository.insert(createUserDto);
+      const userData = await this.userRepository.insert(createUserDto);
+      return userData.generatedMaps[0];
     }
     return data;
   }
