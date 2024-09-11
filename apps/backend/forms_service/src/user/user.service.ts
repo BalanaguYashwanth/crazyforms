@@ -17,7 +17,7 @@ export class UserService {
     });
     if (!data) {
       const userData = await this.userRepository.insert(createUserDto);
-      return userData.generatedMaps[0];
+      return userData?.generatedMaps[0];
     }
     return data;
   }
