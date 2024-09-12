@@ -1,7 +1,7 @@
 import { Form } from "@quillforms/renderer-core";
 import type { FormBlocks } from '@quillforms/types';
-import { CustomTypeFormProps } from "../../types";
-import logo from '../../../assets/logo.png'
+import { CustomTypeFormProps } from "../../common/types";
+import logo from '../../assets/logo.png'
 
 const CustomTypeForm = ({ blocks, disableNavigationArrows = false, handleSubmitExtraActions }: CustomTypeFormProps) => {
     return (

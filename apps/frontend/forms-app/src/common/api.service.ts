@@ -1,3 +1,5 @@
+import { ObjectProps } from "./types"
+
 export const createOrUpdateQuestions = (data: unknown) => {
     return fetch('http://localhost:3000/question', {
         method: 'POST',
@@ -74,7 +76,7 @@ export const createForms = (data: unknown) => {
     })
 }
 
-export const updateForms = (data: {id: number, escrowId: string}) => {
+export const updateForms = (data: ObjectProps) => {
     return fetch(`http://localhost:3000/form/${data.id}`, {
         method: 'PATCH',
         headers:{

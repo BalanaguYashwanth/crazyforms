@@ -1,5 +1,8 @@
 import { ReactNode } from 'react';
 import type { FormBlocks } from '@quillforms/types';
+import { Contract } from 'ethers';
+import { BrowserProvider } from 'ethers';
+import { JsonRpcSigner } from 'ethers';
 
 export interface CustomTypeFormProps{
     blocks: FormBlocks,
@@ -38,7 +41,7 @@ export interface QuestionBlockProps {
 }
 
 export interface ObjectProps{
-    [key: string]: string;
+    [key: string]: string | number;
 }
 
 export interface FormBuilderContextProviderProps {
@@ -61,3 +64,22 @@ export interface StepFormEditorProps{
 export interface IntegrationsProps { formId: number, formTitle: string }
 
 export interface matchQuestionWithAnswersProps{ answers: FormAnswersProp, receiverAddress: string, escrowId: string }
+
+export interface UseEVMWalletProps {
+    CONTRACT_ADDRESS: string;
+    CONTRACT_ABI: any; // If you have ABI types, you can be more specific
+  }
+  
+export interface UseEVMWalletReturn {
+    connectEVMWallet: () => Promise<void>;
+    contract: Contract | null;
+    provider: BrowserProvider | null;
+    signer: JsonRpcSigner | null;
+    walletAddress: string;
+  }
+  
+declare global {
+    interface Window {
+      ethereum?: any;
+    }
+  }

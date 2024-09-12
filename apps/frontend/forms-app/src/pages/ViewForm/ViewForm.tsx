@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import toast, { Toaster } from 'react-hot-toast';
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
+import CustomTypeForm from '../../components/CustomTypeForm/CustomTypeForm';
 import { decodeString } from '../../common/encodingDecoding';
-import CustomTypeForm from '../../common/components/CustomTypeForm/CustomTypeForm';
 import { FormAnswersProp, matchQuestionWithAnswersProps, ObjectProps, QuestionBlockProps } from '../../common/types';
 import { createAnswers, createUser, fetchByFormIdUserId, fetchFormById, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'

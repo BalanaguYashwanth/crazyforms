@@ -1,13 +1,13 @@
 import { useState } from "react";
-import FormBuilder from "../../common/components/FormBuilder/FormBuilder";
 // @ts-expect-error: Import not typed correctly
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
-import CustomTypeForm from "../../common/components/CustomTypeForm/CustomTypeForm";
 import { newContentBlockObject } from "../../common/constants";
 import { handleChangeContentProps, handleRadioBoxProps } from "../../common/types";
+import { FormBuilderContextProvider } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
+import FormBuilder from "../../components/FormBuilder/FormBuilder";
+import CustomTypeForm from "../../components/CustomTypeForm/CustomTypeForm";
 import './EditForm.scss'
 import "@quillforms/renderer-core/build-style/style.css";
-import { FormBuilderContextProvider } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
 registerCoreBlocks()
 
 const EditForm = () => {

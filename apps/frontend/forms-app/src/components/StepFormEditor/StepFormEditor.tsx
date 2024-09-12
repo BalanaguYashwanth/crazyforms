@@ -1,18 +1,18 @@
 import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { FormBuilderContext } from "../../centralizeStore/FormBuilderContext/FormBuilderContext";
-import { createForms, createOrUpdateQuestions } from "../../api.service";
-import { StepFormEditorProps } from "../../types";
+import { StepFormEditorProps } from "../../common/types";
+import { FormBuilderContext } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
+import { createForms, createOrUpdateQuestions } from "../../common/api.service";
 import './StepFormEditor.scss'
 
-const StepFormEditor = ({handleSetFormId, handleSetFormTitle}: StepFormEditorProps) => {
+const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorProps) => {
     const {
         addContentBlock,
         contentBlock,
         handleChangeContent,
         handleRadioBox
     } = useContext(FormBuilderContext) as any;
-    const [formDetails, setFormDetails] = useState({ title: "", description: "", user: JSON.parse(localStorage.getItem('user')|| '')?.id, escrow:{}});
+    const [formDetails, setFormDetails] = useState({ title: "", description: "", user: JSON.parse(localStorage.getItem('user') || '')?.id, escrow: {} });
 
     const handleSubmitForm = async () => {
         try {
@@ -23,9 +23,11 @@ const StepFormEditor = ({handleSetFormId, handleSetFormTitle}: StepFormEditorPro
             await createOrUpdateQuestions({ formId, questions: contentBlock });
             handleSetFormId(formId)
             handleSetFormTitle(formName)
-        } catch(err) {
-            console.log('err--->', err)
-            toast.error('Error in updating...');
+            toast.success('Successfully saved')
+        } catch (err) {
+            if (err instanceof Error) {
+                toast.error(`Error in updating...${err}`);
+            }
         }
     }
 
@@ -33,7 +35,7 @@ const StepFormEditor = ({handleSetFormId, handleSetFormTitle}: StepFormEditorPro
         <main className="text-center">
             <Toaster />
             <section className='step-form-editor'>
-                <input className='input-block-another' placeholder="Title" required onChange={(e) => setFormDetails({  ...formDetails, title: e.target.value, })} />
+                <input className='input-block-another' placeholder="Title" required onChange={(e) => setFormDetails({ ...formDetails, title: e.target.value, })} />
                 <input className='input-block-another' placeholder="Description" required onChange={(e) => setFormDetails({ ...formDetails, description: e.target.value })} />
                 {
                     contentBlock.map((block: any, index: number) => (

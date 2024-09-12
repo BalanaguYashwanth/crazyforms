@@ -125,3 +125,27 @@ export const REDIRECTION_ROUTES = {
   EDIT_FORM: 'form/edit',
   VIEW_FORM: 'form/:id',
 }
+
+export const CHAINS = {
+  SUI: 'SUI',
+  KIICHAIN: 'KIICHAIN',
+}
+
+export const KII_CHAIN_RPC_URL = 'https://a.sentry.testnet.kiivalidator.com:8645/'
+
+export const KII_CHAIN_PARAMS = {
+  chainId: '0x75bc371', // 123454321 in hex
+  chainName: 'KiiChain',
+  rpcUrls: [KII_CHAIN_RPC_URL],
+  nativeCurrency: {
+    name: 'Kiichain Testnet',
+    symbol: 'kii',
+    decimals: 18,
+  },
+  blockExplorerUrls: ['https://kiichainexplorer.com/'],
+};
+
+export const KII_CHAIN_RPC_CONFIG = {
+  chainId: 123454321,
+  name: "kiichain",
+}

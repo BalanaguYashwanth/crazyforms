@@ -1,0 +1,25 @@
+.integrations-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin: 1rem;
+   flex-direction: column;
+
+   .form {
+      margin: 1rem;
+   }
+
+   table,
+   td,
+   th {
+      border: 1px solid;
+      padding: 5px;
+   }
+
+   table {
+      text-align: center;
+      width: 100%;
+      border-collapse: collapse;
+   }
+
+}

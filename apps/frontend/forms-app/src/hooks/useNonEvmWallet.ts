@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getWallets } from '@wallet-standard/app';
 
-export const useWallet = () => {
+export const useNonEvmWallet = () => {
   const [wallets, setWallets] = useState([]);
   const [selectedWallet, setSelectedWallet] = useState('');
   const [accounts, setAccounts] = useState([]);

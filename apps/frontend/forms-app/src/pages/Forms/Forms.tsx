@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { encodeNumber } from "../../common/encodingDecoding";
-import CustomButton from "../../common/components/CustomButton/CustomButton";
+import CustomButton from "../../components/CustomButton/CustomButton";
 import { ObjectProps } from "../../common/types";
 import { REDIRECTION_ROUTES } from "../../common/constants";
 import { fetchForms } from "../../common/api.service";
