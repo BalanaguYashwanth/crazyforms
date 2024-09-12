@@ -23,9 +23,10 @@ export class QuestionController {
 
   @Post('answers')
   createAnswers(@Body() data: any) {
-    const { answers, escrowId, receiverAddress } = data;
+    const { answers, chainType, escrowId, receiverAddress } = data;
     return this.questionService.createAnswers({
       answers,
+      chainType,
       escrowId,
       receiverAddress,
     });

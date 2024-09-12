@@ -63,7 +63,7 @@ export interface StepFormEditorProps{
 
 export interface IntegrationsProps { formId: number, formTitle: string }
 
-export interface matchQuestionWithAnswersProps{ answers: FormAnswersProp, receiverAddress: string, escrowId: string }
+export interface matchQuestionWithAnswersProps{ answers: FormAnswersProp }
 
 export interface UseEVMWalletProps {
     CONTRACT_ADDRESS: string;

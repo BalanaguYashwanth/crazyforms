@@ -29,13 +29,4 @@ export class KiiFormsEscrowRespository {
         }
     }
 
-    async reward(props: any){
-        try{
-            const tx = await this.contract.reward(props.receiverAddress, props.escrowId);
-            await tx.wait();
-            console.log('Rewards tx', tx)
-        } catch(err){
-            console.log('Error tx rewards', err)
-        }
-    }
 }

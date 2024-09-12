@@ -25,10 +25,10 @@ const ViewForm = () => {
     const fetchFormDetails = async () => {
         const dataPromise = await fetchFormById(formId)
         const data = await dataPromise.json()
-        return data[0].escrow.id;
+        return { escrowId: data[0]?.escrow?.escrowId, chainType: data[0]?.escrow?.type };
     }
 
-    const matchQuestionWithAnswers = async ({ answers, receiverAddress, escrowId }: matchQuestionWithAnswersProps) => {
+    const matchQuestionWithAnswers = async ({ answers }: matchQuestionWithAnswersProps) => {
         try {
             const questionWithAnswers = contentBlocks.map((block: QuestionBlockProps) => {
                 if (block?.attributes && answers[block.id]) {
@@ -40,7 +40,7 @@ const ViewForm = () => {
                     }
                 }
             })
-            await createAnswers({ answers: questionWithAnswers, receiverAddress, escrowId });
+            return questionWithAnswers;
         } catch {
             toast.error('Error in submitting, please try again')
         }
@@ -48,13 +48,17 @@ const ViewForm = () => {
 
     const handleSubmit = async (data: { answers: FormAnswersProp; }) => {
         try {
-            const receiverAddress = window.prompt("Enter your wallet address") || '';
-            const escrowId = await fetchFormDetails()
+            const { escrowId, chainType } = await fetchFormDetails()
+            let receiverAddress = null;
+            if (chainType && escrowId) {
+                receiverAddress = window.prompt(`To receieve rewards - Enter your ${chainType} wallet address`) || '';
+            }
             if (data?.answers) {
                 toast.loading('Loading');
-                await matchQuestionWithAnswers({ answers: data.answers, receiverAddress, escrowId })
+                const answers = await matchQuestionWithAnswers({ answers: data.answers })
+                await createAnswers({ answers, receiverAddress, escrowId, chainType });
                 toast.dismiss();
-                toast.success('Successfully recieved rewards, please check your wallet')
+                toast.success((escrowId && receiverAddress) ? 'Successfully recieved rewards, please check your wallet' : 'Successfully Submitted')
             } else {
                 toast.error('Must fill all answers')
             }
@@ -136,7 +140,7 @@ const ViewForm = () => {
                     :
                     <p className='center'>Form is either submitted or not found</p>
                     :
-                    <p>loading...</p>
+                    <p>Loading...</p>
             }
         </main>
     ) : (

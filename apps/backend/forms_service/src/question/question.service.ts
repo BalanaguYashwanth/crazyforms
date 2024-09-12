@@ -5,7 +5,7 @@ import { CreateAnswerDto, CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { Question } from './entities/question.entity';
 import { Answer } from './entities/answer.entity';
-import { SUIContract } from './contracts/suiContract';
+import { triggerRewards } from './helpers/rewards';
 
 @Injectable()
 export class QuestionService {
@@ -14,7 +14,6 @@ export class QuestionService {
     private readonly questionRepository: Repository<Question>,
     @InjectRepository(Answer)
     private readonly answerRepository: Repository<Answer>,
-    private suiContract: SUIContract,
   ) {}
 
   upsert(createQuestionDto: CreateQuestionDto) {
@@ -60,15 +59,19 @@ export class QuestionService {
 
   async createAnswers({
     answers,
+    chainType,
     escrowId,
     receiverAddress,
   }: {
     answers: CreateAnswerDto[];
+    chainType: string;
     escrowId: string;
     receiverAddress: string;
   }) {
     try {
-      await this.suiContract.reward({ escrowId, receiverAddress });
+      if (escrowId && receiverAddress && chainType) {
+        await triggerRewards({ escrowId, receiverAddress, chainType });
+      }
       return this.answerRepository.save(answers);
     } catch (error) {
       if (error instanceof Error) {
