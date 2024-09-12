@@ -9,11 +9,13 @@ import { KiiFormsEscrowRespository } from "../../../../chains/EVM/KiiChain/Infra
 import { generateRandomAddress } from "../../../../common/helper";
 
 const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
+    const initalForm = { budget: 0, cpr: 0, coinAddress: "" }
     const { formId, formTitle } = useContext(FormBuilderContext) as unknown as ObjectProps;
     const [escrowId, setEscrowId] = useState('');
-    const [form, setForm] = useState({ budget: 0, cpr: 0, coinAddress: "" });
+    const [form, setForm] = useState({...initalForm});
 
     const handleSubmit = async () => {
+        toast.loading('Loading')
         if (!walletAddress) {
             toast.error('Please connect to your wallet address')
             return;
@@ -40,7 +42,9 @@ const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
             await escrowRef.create(escrowParams);
             await updateForms({ id: formId, type: CHAINS.KIICHAIN, escrowId, contractAddress: KII_CHAIN_CONTRACT_ADDRESS })
             setEscrowId(escrowId)
+            toast.dismiss();
             toast.success('success')
+            setForm(initalForm)
         } catch (err) {
             if (err instanceof Error)
                 toast.success(`error occured ${err?.message}`)
@@ -52,9 +56,9 @@ const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
             <Toaster />
             <form className="form">
                 <p>Add budget</p>
-                <input onChange={e => setForm({ ...form, budget: Number(e.target.value) })} />
+                <input value={form.budget} onChange={e => setForm({ ...form, budget: Number(e.target.value) })} type="number"/>
                 <p>Cost per response</p>
-                <input onChange={e => setForm({ ...form, cpr: Number(e.target.value) })} />
+                <input value={form.cpr} onChange={e => setForm({ ...form, cpr: Number(e.target.value) })} type="number"/>
                 <br />
             </form>
             <button className="submit-button" onClick={handleSubmit}>Create Escrow</button>
