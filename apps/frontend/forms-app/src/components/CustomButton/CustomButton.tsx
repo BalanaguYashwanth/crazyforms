@@ -1,4 +1,4 @@
-import { CustomButtonProps } from "../../types";
+import { CustomButtonProps } from '../../common/types';
 import './CustomButton.scss'
 
 const CustomButton = ({ title, handleSubmit }: CustomButtonProps) => {

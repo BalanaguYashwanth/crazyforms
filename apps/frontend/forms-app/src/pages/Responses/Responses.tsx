@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { REDIRECTION_ROUTES } from "../../common/constants";
 import { fetchAnswersByFormId, fetchQuestionsByFormId } from "../../common/api.service";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import './Responses.scss'
 
 const Responses = () => {
     const navigate = useNavigate();
@@ -47,7 +49,7 @@ const Responses = () => {
     }
 
     const handlePushToWalrus = () => {
-       console.log('working')
+        console.log('working')
     }
 
     useEffect(() => {
@@ -62,7 +64,11 @@ const Responses = () => {
     console.log()
     return (
         <main>
-            <button className="m16" onClick={handlePushToWalrus}>Push to paid marketplace & Get paid</button>
+            <section className="button-stack">
+                <CustomButton title="Click to push this below data to paid marketplace & Get paid" handleSubmit={handlePushToWalrus} />
+                <CustomButton title="Click to push to community responses" handleSubmit={() => { }} />
+            </section>
+
             <table>
                 <thead>
                     <tr>

@@ -1,0 +1,10 @@
+.button-stack{
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    flex-direction: column;
+    
+    *{
+        margin: 10px;
+    }
+}
