@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmitOnError false && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "tsc --noEmitOnError false && vite build && vite preview"
   },
   "dependencies": {
     "@mysten/dapp-kit": "^0.14.19",

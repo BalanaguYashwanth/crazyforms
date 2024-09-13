@@ -145,10 +145,12 @@ const ViewForm = () => {
         </main>
     ) : (
         <main className='center'>
-            <h2> Zk Login</h2>
+            <p className='m5'> To continue to fill form - Zk Login</p>
             <GoogleLogin
                 onSuccess={handleSuccessLogin}
                 onError={handleErrorLogin}
+                text="continue_with"
+                shape="square"
             />
         </main>
     )

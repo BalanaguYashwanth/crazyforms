@@ -1,7 +1,8 @@
+import { API_URL } from "./config"
 import { ObjectProps } from "./types"
 
 export const createOrUpdateQuestions = (data: unknown) => {
-    return fetch('http://localhost:3000/question', {
+    return fetch(`${API_URL}/question`, {
         method: 'POST',
         headers:{
             "Content-Type": "application/json",
@@ -11,7 +12,7 @@ export const createOrUpdateQuestions = (data: unknown) => {
 }
 
 export const fetchQuestionsByFormId = (data: {id: number}) => {
-    return fetch(`http://localhost:3000/question/${data?.id}`, {
+    return fetch(`${API_URL}/question/${data?.id}`, {
         method: 'GET',
         headers:{
             "Content-Type": "application/json",
@@ -20,7 +21,7 @@ export const fetchQuestionsByFormId = (data: {id: number}) => {
 }
 
 export const createAnswers = (data: unknown) => {
-    return fetch('http://localhost:3000/question/answers', {
+    return fetch(`${API_URL}/question/answers`, {
         method: 'POST',
         headers:{
             "Content-Type": "application/json",
@@ -30,7 +31,7 @@ export const createAnswers = (data: unknown) => {
 }
 
 export const createUser = (data: unknown) => {
-    return fetch('http://localhost:3000/user', {
+    return fetch(`${API_URL}/user`, {
         method: 'POST',
         headers:{
             "Content-Type": "application/json",
@@ -40,7 +41,7 @@ export const createUser = (data: unknown) => {
 }
 
 export const fetchForms = () => {
-    return fetch('http://localhost:3000/form', {
+    return fetch(`${API_URL}/form`, {
         method: 'GET',
         headers:{
             "Content-Type": "application/json",
@@ -49,7 +50,7 @@ export const fetchForms = () => {
 }
 
 export const fetchFormById = (id: number) => {
-    return fetch(`http://localhost:3000/form/${id}`, {
+    return fetch(`${API_URL}/form/${id}`, {
         method: 'GET',
         headers:{
             "Content-Type": "application/json",
@@ -58,7 +59,7 @@ export const fetchFormById = (id: number) => {
 }
 
 export const fetchByFormIdUserId = (data: {userId: number, formId: number}) => {
-    return fetch(`http://localhost:3000/question/form/${data.formId}/user/${data.userId}`, {
+    return fetch(`${API_URL}/question/form/${data.formId}/user/${data.userId}`, {
         method: 'GET',
         headers:{
             "Content-Type": "application/json",
@@ -67,7 +68,7 @@ export const fetchByFormIdUserId = (data: {userId: number, formId: number}) => {
 }
 
 export const createForms = (data: unknown) => {
-    return fetch('http://localhost:3000/form', {
+    return fetch(`${API_URL}/form`, {
         method: 'POST',
         headers:{
             "Content-Type": "application/json",
@@ -77,7 +78,7 @@ export const createForms = (data: unknown) => {
 }
 
 export const updateForms = (data: ObjectProps) => {
-    return fetch(`http://localhost:3000/form/${data.id}`, {
+    return fetch(`${API_URL}/form/${data.id}`, {
         method: 'PATCH',
         headers:{
             "Content-Type": "application/json",
