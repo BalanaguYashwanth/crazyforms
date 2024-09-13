@@ -58,6 +58,24 @@ export const fetchFormById = (id: number) => {
     })
 }
 
+export const fetchFormByUserId = (id: number) => {
+    return fetch(`${API_URL}/form/user/${id}`, {
+        method: 'GET',
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+}
+
+export const fetchAnswersByFormId = (data: {formId: number}) => {
+    return fetch(`${API_URL}/question/form/${data.formId}`, {
+        method: 'GET',
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+}
+
 export const fetchByFormIdUserId = (data: {userId: number, formId: number}) => {
     return fetch(`${API_URL}/question/form/${data.formId}/user/${data.userId}`, {
         method: 'GET',

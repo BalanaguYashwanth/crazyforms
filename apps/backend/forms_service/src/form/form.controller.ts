@@ -30,6 +30,11 @@ export class FormController {
     return this.formService.findOne(+id);
   }
 
+  @Get('/user/:id')
+  findByUser(@Param('id') id: string) {
+    return this.formService.findFornByUserId(+id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: number, @Body() updateFormDto: UpdateFormDto) {
     return this.formService.update(+id, updateFormDto);

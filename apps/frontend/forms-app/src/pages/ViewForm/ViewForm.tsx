@@ -8,6 +8,7 @@ import { decodeString } from '../../common/encodingDecoding';
 import { FormAnswersProp, matchQuestionWithAnswersProps, ObjectProps, QuestionBlockProps } from '../../common/types';
 import { createAnswers, createUser, fetchByFormIdUserId, fetchFormById, fetchQuestionsByFormId } from '../../common/api.service';
 import './ViewForm.scss'
+import blurImage from '../../assets/blur-form.png';
 
 const ViewForm = () => {
     const { id } = useParams();
@@ -123,7 +124,7 @@ const ViewForm = () => {
     }, [checkUserIsExists, id, user?.userId])
 
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('user') && (JSON.parse(localStorage.getItem('user') || '')?.id))) {
+        if (JSON.parse(localStorage.getItem('user') && (JSON.parse(localStorage.getItem('user'))?.id))) {
             setUser({ userId: (JSON.parse(localStorage.getItem('user') || '')?.id) })
         }
     }, [])
@@ -144,13 +145,14 @@ const ViewForm = () => {
             }
         </main>
     ) : (
-        <main className='center'>
-            <p className='m5'> To continue to fill form - Zk Login</p>
+        <main className='center'  style={{ backgroundImage: `url(${blurImage})`, backgroundSize: 'cover' }}>
+            <h4 className='sign-header'> To continue to fill form - Zk Login</h4>
             <GoogleLogin
                 onSuccess={handleSuccessLogin}
                 onError={handleErrorLogin}
                 text="continue_with"
                 shape="square"
+                theme="filled_black"
             />
         </main>
     )

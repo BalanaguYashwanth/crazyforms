@@ -5,6 +5,7 @@ import Forms from "../pages/Forms/Forms";
 import { REDIRECTION_ROUTES } from "../common/constants";
 import EditForm from "../pages/EditForm/EditForm";
 import ViewForm from "../pages/ViewForm/ViewForm";
+import Responses from "../pages/Responses/Responses";
 
 export const router = createHashRouter([
     {
@@ -26,6 +27,10 @@ export const router = createHashRouter([
         {
             path: REDIRECTION_ROUTES.VIEW_FORM,
             element: <ViewForm />,
+        },
+        {
+          path: REDIRECTION_ROUTES.RESPONSES,
+          element: <Responses />,
         }
       ],
     },

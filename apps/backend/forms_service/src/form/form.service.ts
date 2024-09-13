@@ -23,6 +23,14 @@ export class FormService {
     return this.formRepository.find({ where: { id } });
   }
 
+  findFornByUserId(id: any) {
+    return this.formRepository
+      .createQueryBuilder('form')
+      .innerJoinAndSelect('form.user', 'user')
+      .where('user.id = :userId', { userId: Number(id) })
+      .getMany();
+  }
+
   update(id: number, updateFormDto: UpdateFormDto) {
     return this.formRepository.update({ id }, { escrow: { ...updateFormDto } });
   }

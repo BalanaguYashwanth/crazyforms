@@ -55,3 +55,17 @@ a {
   height: 100vh;
   flex-direction: column;
 }
+
+
+table,
+td,
+th {
+   border: 1px solid;
+   padding: 5px;
+}
+
+table {
+   text-align: center;
+   width: 100%;
+   border-collapse: collapse;
+}
