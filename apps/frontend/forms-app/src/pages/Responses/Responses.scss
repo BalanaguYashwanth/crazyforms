@@ -1,10 +1,17 @@
-.button-stack{
+.button-stack {
     display: flex;
     align-items: flex-end;
     justify-content: end;
     flex-direction: column;
-    
-    *{
+
+    * {
         margin: 10px;
     }
+}
+
+.center-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
 }

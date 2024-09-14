@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { REDIRECTION_ROUTES } from "../../common/constants";
 import { fetchAnswersByFormId, fetchQuestionsByFormId } from "../../common/api.service";
@@ -39,13 +40,23 @@ const Responses = () => {
     }
 
     const fetchAnswers = async (formId: number) => {
-        const questionPromise = await fetchQuestionsByFormId({ id: formId })
-        const questions = await questionPromise.json();
-        const struturedQuestions = questions.map(question => { return { label: question.attributes.label, questionId: question.key } })
+        try {
+            toast.loading('Fetching details')
+            const questionPromise = await fetchQuestionsByFormId({ id: formId })
+            const questions = await questionPromise.json();
+            const struturedQuestions = questions.map(question => { return { label: question.attributes.label, questionId: question.key } })
 
-        const answerPromise = await fetchAnswersByFormId({ formId })
-        const answers = await answerPromise.json();
-        matchQuestionWithAnswers(struturedQuestions, answers.data);
+            const answerPromise = await fetchAnswersByFormId({ formId })
+            const answers = await answerPromise.json();
+            matchQuestionWithAnswers(struturedQuestions, answers.data);
+            toast.dismiss();
+            toast.success('Loaded Responses')
+        } catch (err) {
+            if (err instanceof Error) {
+                toast.error(`Error occured ${err}`)
+            }
+        }
+
     }
 
     const handlePushToWalrus = () => {
@@ -61,12 +72,18 @@ const Responses = () => {
         }
     }, [id, navigate])
 
-    console.log()
     return (
         <main>
-            <section className="button-stack">
-                <CustomButton title="Click to push this below data to paid marketplace & Get paid" handleSubmit={handlePushToWalrus} />
-                <CustomButton title="Click to push to community responses" handleSubmit={() => { }} />
+            <Toaster />
+            <section className="center-header">
+                <h1></h1>
+                <h1>Responses</h1>
+                <article className="button-stack">
+                    <CustomButton title="Click to push this below data to paid marketplace & Get paid" handleSubmit={handlePushToWalrus} />
+                    <CustomButton title="Click to push to community voting" handleSubmit={() => { }} />
+                    <CustomButton title="AI summarizer" handleSubmit={() => { }} />
+                </article>
+
             </section>
 
             <table>
