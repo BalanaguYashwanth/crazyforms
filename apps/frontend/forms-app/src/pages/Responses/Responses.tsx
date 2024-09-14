@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { REDIRECTION_ROUTES } from "../../common/constants";
 import { fetchAnswersByFormId, fetchQuestionsByFormId } from "../../common/api.service";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import PieChart from '../../assets/piechart.png'
 import './Responses.scss'
 
 const Responses = () => {
@@ -83,9 +84,8 @@ const Responses = () => {
                     <CustomButton title="Click to push to community voting" handleSubmit={() => { }} />
                     <CustomButton title="AI summarizer" handleSubmit={() => { }} />
                 </article>
-
             </section>
-
+            <img src={PieChart} alt="piechart" />
             <table>
                 <thead>
                     <tr>

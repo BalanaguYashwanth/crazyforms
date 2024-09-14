@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from 'react-router-dom';
 import { encodeNumber } from "../../common/encodingDecoding";
 import CustomButton from "../../components/CustomButton/CustomButton";
@@ -12,9 +13,11 @@ const Forms = () => {
     const [forms, setForms] = useState([]);
 
     const getForms = async (userId: number) => {
+        toast.loading('Fetching...')
         const dataPromise = await fetchFormByUserId(userId);
         const data = await dataPromise.json();
         setForms(data);
+        toast.dismiss();
     }
 
     const handleSubmit = () => {
@@ -41,6 +44,7 @@ const Forms = () => {
 
     return (
         <main className="forms-container">
+            <Toaster />
             <div className="forms-header">
                 <h1></h1>
                 <h2 className="text-center">Forms</h2>
