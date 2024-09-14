@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import Choices from "../Choices/Choices";
 import { StepFormEditorProps } from "../../common/types";
 import { FormBuilderContext } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
 import { createForms, createOrUpdateQuestions } from "../../common/api.service";
@@ -9,6 +10,7 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
     const {
         addContentBlock,
         contentBlock,
+        handleInputBlockType,
         handleChangeContent,
         handleRadioBox
     } = useContext(FormBuilderContext) as any;
@@ -16,6 +18,7 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
 
     const handleSubmitForm = async () => {
         try {
+            toast.loading('Saving...')
             const promise = await createForms(formDetails);
             const data = await promise.json();
             const formId = data.raw[0].id;
@@ -23,6 +26,7 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
             await createOrUpdateQuestions({ formId, questions: contentBlock });
             handleSetFormId(formId)
             handleSetFormTitle(formName)
+            toast.dismiss();
             toast.success('Successfully saved')
         } catch (err) {
             if (err instanceof Error) {
@@ -30,7 +34,7 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
             }
         }
     }
-
+    
     return (
         <main className="text-center">
             <Toaster />
@@ -41,14 +45,17 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
                     contentBlock.map((block: any, index: number) => (
                         <div key={`builder-block-${index}`} className='builder-block'>
                             <div className='builder-block-child'>
-                                <input
-                                    autoFocus
-                                    placeholder='Enter the question'
-                                    className='input-block'
-                                    value={block.attributes?.label}
-                                    onChange={(e) => handleChangeContent(
-                                        { contentIndex: index, text: e.target.value }
-                                    )} />
+                                <div>
+                                    <input
+                                        autoFocus
+                                        placeholder='Enter the question'
+                                        className='input-block'
+                                        value={block.attributes?.label}
+                                        onChange={(e) => handleChangeContent(
+                                            { contentIndex: index, text: e.target.value }
+                                        )} />
+                                        {block.name == 'multiple-choice' && <Choices blockId={index} choices={block.attributes.choices} />}
+                                </div>
                                 <div>
                                     <p>Required</p>
                                     <input
@@ -72,7 +79,20 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
                                     <label htmlFor={`required2-${index}`}>False</label>
                                 </div>
                             </div>
-                            {index == contentBlock.length - 1 && <button className='add-button' onClick={addContentBlock}>+</button>}
+                            <div>
+                                <select onChange={(e)=>handleInputBlockType(e.target.value)}>
+                                    <option value="">
+                                        select box
+                                    </option>
+                                    <option value="inputBox">
+                                        Input Box
+                                    </option>
+                                    <option value="choiceBox">
+                                        Choice Box
+                                    </option>
+                                </select>
+                                {index == contentBlock.length - 1 && <button className='add-button' onClick={addContentBlock}>+</button>}
+                            </div>
                         </div>
                     ))
                 }

@@ -117,7 +117,36 @@ export const newContentBlockObject = {
       required: false,
       label: 'Untitled text'
     }
+}
+
+export const choicesBlock =  {
+  name: "multiple-choice",
+  id: "kd12edg",
+  attributes: {
+    required: true,
+    multiple: false,
+    verticalAlign: false,
+    label: "Untitled text",
+    choices: [
+      {
+        id: 0,
+        label: "text1",
+        value: "text1"
+      },
+      {
+        id: 1,
+        label: "text2",
+        value: "text2"
+      },
+    ]
   }
+}
+
+export const choiceItemBlock = {
+  id: 0,
+  label: "text1",
+  value: "text1"
+}
 
 export const REDIRECTION_ROUTES = {
   HOME: '/',

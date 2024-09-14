@@ -34,7 +34,7 @@ const ViewForm = () => {
             const questionWithAnswers = contentBlocks.map((block: QuestionBlockProps) => {
                 if (block?.attributes && answers[block.id]) {
                     return {
-                        answer: answers[block.id].value,
+                        answer: typeof answers[block.id].value == 'object' ? answers[block.id].value[0] : answers[block.id].value,
                         question: block.key,
                         form: formId,
                         user: Number(user.userId),
