@@ -35,7 +35,7 @@ const Home = () => {
 
     return (
         <main className='home-container'>
-            <h1>CrazyForms</h1>
+            <h1>To Create Forms</h1>
             <GoogleLogin
                 onSuccess={handleSuccessLogin}
                 onError={handleErrorLogin}
