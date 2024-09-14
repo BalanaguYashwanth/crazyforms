@@ -11,7 +11,7 @@
     - Chains
         - Eth, KiiChain, SUI
 
-# project structure
+# Project structure
 
     FormPilot
     ├── apps
