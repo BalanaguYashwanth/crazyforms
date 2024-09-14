@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { Chart } from "react-google-charts";
 import { useNavigate, useParams } from "react-router-dom";
 import { REDIRECTION_ROUTES } from "../../common/constants";
 import { fetchAnswersByFormId, fetchQuestionsByFormId } from "../../common/api.service";
@@ -72,15 +73,30 @@ const Responses = () => {
         }
     }, [id, navigate])
 
+    const options = {
+        title: "",
+    };
+
+
     return (
         <main>
             <Toaster />
+            { responses.length>0 && <Chart
+                chartType="PieChart"
+                data={[
+                    Object.keys(responses[0]),
+                    responses, // structure should be - ["Task", "Hours per Day"]
+                ]}
+                options={options}
+                width={"100%"}
+                height={"250px"}
+            />}
             <section className="center-header">
                 <h1></h1>
                 <h1>Responses</h1>
                 <article className="button-stack">
-                    <CustomButton title="Click to push this below data to paid marketplace & Get paid" handleSubmit={handlePushToWalrus} />
                     <CustomButton title="Click to push to community voting" handleSubmit={() => { }} />
+                    <CustomButton title="Click to get online url to integrate" handleSubmit={handlePushToWalrus} />
                     <CustomButton title="AI summarizer" handleSubmit={() => { }} />
                 </article>
 

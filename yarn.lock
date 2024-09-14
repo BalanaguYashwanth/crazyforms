@@ -7415,6 +7415,7 @@ __metadata:
     jwt-decode: ^4.0.0
     react: ^18.3.1
     react-dom: ^18.3.1
+    react-google-charts: ^4.0.1
     react-hot-toast: ^2.4.1
     react-responsive-modal: ^6.4.2
     react-router-dom: ^6.26.1
@@ -10472,6 +10473,16 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 298954ecd8f78288dcaece05e88b570014d8f6dce5db6f66e6ee91448debeb59dcd31561dddb354eee47e6c1bb234669459060deb238ed0213497146e555a0b9
+  languageName: node
+  linkType: hard
+
+"react-google-charts@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "react-google-charts@npm:4.0.1"
+  peerDependencies:
+    react: ">=16.3.0"
+    react-dom: ">=16.3.0"
+  checksum: 874a552b07cc67d6b830718dd5e71055c46fbd0c7a12bca14078c0744111d8fead833e36a16bd0b0ea5c26f6cff0eb84b4b6de62845c945b3c47c6cc75233f9d
   languageName: node
   linkType: hard
 
