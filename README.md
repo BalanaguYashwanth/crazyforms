@@ -1,6 +1,6 @@
 # FormPilot (aka crazyforms)
 
-    - Powered with Escrow pools + Rewards + LLM
+    - Powered with MultiChain + Escrow + Rewards + LLM
 
 # Tech stack
 
