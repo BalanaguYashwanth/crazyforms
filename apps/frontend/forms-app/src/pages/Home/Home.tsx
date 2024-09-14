@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from "jwt-decode";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google"
@@ -25,6 +26,12 @@ const Home = () => {
     const handleErrorLogin = () => {
         alert('failed to login')
     }
+
+    useEffect(()=>{
+        if(localStorage.getItem('user')){
+            navigate('/'+REDIRECTION_ROUTES.FORMS)
+        }
+    },[navigate])
 
     return (
         <main className='home-container'>

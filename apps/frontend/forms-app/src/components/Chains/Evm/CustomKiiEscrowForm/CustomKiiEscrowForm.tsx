@@ -46,6 +46,7 @@ const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
             toast.success('success')
             setForm(initalForm)
         } catch (err) {
+            toast.dismiss();
             if (err instanceof Error)
                 toast.success(`error occured ${err?.message}`)
         }

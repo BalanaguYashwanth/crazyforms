@@ -38,7 +38,9 @@ const FormBuilder = () => {
             <FormBuilderContextProvider value={{ formId, formTitle }} >
                 <Integrations />
             </FormBuilderContextProvider>
-            {formId > 0 && <CustomButton handleSubmit={handlePublish} title='Publish' />}
+            <div className='top-right'>
+                {formId > 0 && <CustomButton handleSubmit={handlePublish} title='Publish' />}
+            </div>
         </main>
     )
 }

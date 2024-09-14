@@ -58,11 +58,11 @@ const Forms = () => {
                     </tr>
                 </thead>
                 {
-                    forms.map((form: ObjectProps, index) => (
+                    forms.length ? forms.map((form: ObjectProps, index) => (
                         <tbody key={`form-${index}`}>
                             <td> {form.id} </td>
                             <td> {form.title} </td>
-                            <td> {form.description} </td>
+                            <td> {form?.description ? form?.description : '-'} </td>
                             <td> {form.createdAt} </td>
                             <td className="spacing-between-buttons">
                                 <CustomButton title="Edit" handleSubmit={handleEdit}/>
@@ -70,7 +70,7 @@ const Forms = () => {
                             </td>
                             <td> <Link to={`/${REDIRECTION_ROUTES.FORM}/${encodeNumber(Number(form.id))}`} target="_blank">Link</Link></td>
                         </tbody>
-                    ))
+                    )) : <p className="center">No forms found</p>
                 }
             </table>
         </main>
