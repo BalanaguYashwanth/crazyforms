@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { createUser } from '../../common/api.service';
@@ -46,22 +46,22 @@ const Home = () => {
     <main className='home-container' style={{backgroundImage:`url(${banner}`, backgroundSize: 'content'  }}>
       <h1>FormPilot: Streamline Your Workflow</h1>
 
-      <b style={{color:'#e7d395'}}>create form</b>
+      <b style={{color:'#e7d395'}}>Create & Explore</b>
       <GoogleLogin onSuccess={handleSuccessLogin} onError={handleErrorLogin} 
       text="continue_with"
       shape="circle"
       theme="filled_black" />
 
-      {/* <div className="cta-button">Get Started Now</div> */}
-
       <div className="features-section">
        
 
+        <Link target='_blank' to={REDIRECTION_ROUTES.MARKETPLACE}>
         <div className="feature">
           <img src={homepageCard1} alt="Affiliates Program" />
           <h3>Affiliates Program</h3>
           <p>Earn rewards by sharing and promoting forms, and grow your reach effortlessly.</p>
         </div>
+        </Link>
 
         <div className="feature">
           <img src={homepageCard2} alt="Escrow Pools" />
@@ -93,12 +93,15 @@ const Home = () => {
           <p>Distribute tokens as airdrops to users who submit forms, incentivizing participation.</p>
         </div>
 
+        <Link target='_blank' to={REDIRECTION_ROUTES.MARKETPLACE}>
         <div className="feature">
           <img src={homepageCard7} alt="Marketplace" />
           <h3>Marketplace</h3>
           <p>Explore paid and unpaid forms in the marketplace to fill out and earn rewards.</p>
         </div>
+        </Link>
       </div>
+     
 
       <footer className="footer">
         <p>© 2024 FormPilot. All rights reserved.</p>

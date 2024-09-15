@@ -6,12 +6,15 @@
 
     .voting-card{
         border: 1px solid var(--clr-light-grey);
-        display: grid;
-        justify-content: center;
-        grid-template-columns: auto auto;
         gap: 1rem;
         padding: 1rem;
         border-radius: 1rem;
+
+        .grid-2{
+            gap: 1rem;
+            display: grid;
+            grid-template-columns: auto auto;
+        }
     }
  
     .flex{
