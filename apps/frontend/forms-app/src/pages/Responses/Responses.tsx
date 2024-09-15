@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { REDIRECTION_ROUTES } from "../../common/constants";
 import { fetchAnswersByFormId, fetchQuestionsByFormId } from "../../common/api.service";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import PieChart from '../../assets/piechart.png'
 import './Responses.scss'
 
 const Responses = () => {
@@ -37,6 +36,7 @@ const Responses = () => {
         if (allResponses.length > 0) {
             setTableHeading(Object.keys(allResponses[0]))
         }
+        localStorage.setItem('responses', JSON.stringify(allResponses));
         setResponses(allResponses);
     }
 
@@ -64,6 +64,10 @@ const Responses = () => {
         console.log('working')
     }
 
+    const redirectVoting = () => {
+        navigate('/'+REDIRECTION_ROUTES.VOTING)
+    }
+
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
         if (id && user?.id) {
@@ -80,12 +84,11 @@ const Responses = () => {
                 <h1></h1>
                 <h1>Responses</h1>
                 <article className="button-stack">
-                    <CustomButton title="Click to push this below data to paid marketplace & Get paid" handleSubmit={handlePushToWalrus} />
-                    <CustomButton title="Click to push to community voting" handleSubmit={() => { }} />
+                    <CustomButton title="Click to push to community voting" handleSubmit={redirectVoting} />
+                    <CustomButton title="Click to get API url to integrate" handleSubmit={handlePushToWalrus} />
                     <CustomButton title="AI summarizer" handleSubmit={() => { }} />
                 </article>
             </section>
-            <img src={PieChart} alt="piechart" />
             <table>
                 <thead>
                     <tr>
