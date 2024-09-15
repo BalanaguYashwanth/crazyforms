@@ -6,6 +6,8 @@ import { REDIRECTION_ROUTES } from "../common/constants";
 import EditForm from "../pages/EditForm/EditForm";
 import ViewForm from "../pages/ViewForm/ViewForm";
 import Responses from "../pages/Responses/Responses";
+import CommunityVoting from "../pages/CommunityVoting/CommunityVoting";
+import Marketplace from "../components/Marketplace/Marketplace";
 
 export const router = createHashRouter([
     {
@@ -15,6 +17,10 @@ export const router = createHashRouter([
         {
           path: "/",
           element: <Home />,
+        },
+        {
+          path: REDIRECTION_ROUTES.VOTING,
+          element: <CommunityVoting />,
         },
         {
           path: REDIRECTION_ROUTES.FORMS,
@@ -31,6 +37,10 @@ export const router = createHashRouter([
         {
           path: REDIRECTION_ROUTES.RESPONSES,
           element: <Responses />,
+        },
+        {
+          path: REDIRECTION_ROUTES.MARKETPLACE,
+          element: <Marketplace />,
         }
       ],
     },

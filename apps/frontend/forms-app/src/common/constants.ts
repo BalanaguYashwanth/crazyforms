@@ -150,11 +150,13 @@ export const choiceItemBlock = {
 
 export const REDIRECTION_ROUTES = {
   HOME: '/',
+  VOTING: 'voting',
   FORM: 'form',
   FORMS: 'forms',
   EDIT_FORM: 'form/edit',
   VIEW_FORM: 'form/:id',
   RESPONSES: 'responses/:id',
+  MARKETPLACE: 'marketplace',
 }
 
 export const CHAINS = {
