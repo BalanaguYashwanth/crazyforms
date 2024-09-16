@@ -43,24 +43,24 @@ const Home = () => {
   }, [navigate]);
 
   return (
-    <main className='home-container' style={{backgroundImage:`url(${banner}`, backgroundSize: 'content'  }}>
+    <main className='home-container' style={{ backgroundImage: `url(${banner}`, backgroundSize: 'content' }}>
       <h1>FormPilot: Streamline Your Workflow</h1>
 
-      <b style={{color:'#e7d395'}}>Create & Explore</b>
-      <GoogleLogin onSuccess={handleSuccessLogin} onError={handleErrorLogin} 
-      text="continue_with"
-      shape="circle"
-      theme="filled_black" />
+      <b style={{ color: '#e1d8bc' }}>Explore by Zklogin</b>
+      <GoogleLogin onSuccess={handleSuccessLogin} onError={handleErrorLogin}
+        text="continue_with"
+        shape="circle"
+        theme="filled_black" />
 
       <div className="features-section">
-       
+
 
         <Link target='_blank' to={REDIRECTION_ROUTES.MARKETPLACE}>
-        <div className="feature">
-          <img src={homepageCard1} alt="Affiliates Program" />
-          <h3>Affiliates Program</h3>
-          <p>Earn rewards by sharing and promoting forms, and grow your reach effortlessly.</p>
-        </div>
+          <div className="feature">
+            <img src={homepageCard1} alt="Affiliates Program" />
+            <h3>Affiliates Program</h3>
+            <p>Earn rewards by sharing and promoting forms, and grow your reach effortlessly.</p>
+          </div>
         </Link>
 
         <div className="feature">
@@ -94,14 +94,28 @@ const Home = () => {
         </div>
 
         <Link target='_blank' to={REDIRECTION_ROUTES.MARKETPLACE}>
-        <div className="feature">
-          <img src={homepageCard7} alt="Marketplace" />
-          <h3>Marketplace</h3>
-          <p>Explore paid and unpaid forms in the marketplace to fill out and earn rewards.</p>
-        </div>
+          <div className="feature">
+            <img src={homepageCard7} alt="Marketplace" />
+            <h3>Marketplace</h3>
+            <p>Explore paid and unpaid forms in the marketplace to fill out and earn rewards.</p>
+          </div>
         </Link>
+
+        <div className="feature">
+          <img src={homepageCard2} alt="Marketplace" />
+          <h3>Coupon & giveaways</h3>
+          <p>Create copoun or giveways form and enter code unlock rewards</p>
+        </div>
+
+        <div className="feature">
+          <img src={homepageCard3} alt="Marketplace" />
+          <h3>Multi chain</h3>
+          <p>Supports ride range of blockchains from Evm to Non Evm chains</p>
+        </div>
       </div>
-     
+
+
+
 
       <footer className="footer">
         <p>© 2024 FormPilot. All rights reserved.</p>

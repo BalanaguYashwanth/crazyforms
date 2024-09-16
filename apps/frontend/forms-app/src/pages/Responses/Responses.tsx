@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { REDIRECTION_ROUTES } from "../../common/constants";
-import { fetchAnswersByFormId, fetchQuestionsByFormId } from "../../common/api.service";
+import { fetchAnswersByFormId, fetchQuestionsByFormId, publisherWalrus } from "../../common/api.service";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import './Responses.scss'
 
 const Responses = () => {
+    const [apiUrl, setApiUrl] = useState('');
     const navigate = useNavigate();
     const [responses, setResponses] = useState([]);
     const [tableHeading, setTableHeading] = useState([]);
@@ -60,12 +61,25 @@ const Responses = () => {
 
     }
 
-    const handlePushToWalrus = () => {
-        console.log('working')
-    }
-
     const redirectVoting = () => {
         navigate('/'+REDIRECTION_ROUTES.VOTING)
+    }
+
+    const getOnlineUrl = async () => {
+        try{
+            toast.loading('Generating');
+            const promise = await publisherWalrus(responses);
+            const data = await promise.json();
+            if(data?.newlyCreated?.blobObject?.blobId){
+                setApiUrl(data?.newlyCreated?.blobObject?.blobId)
+            }else{
+                setApiUrl(data?.alreadyCertified?.blobId)
+            }
+            toast.dismiss()
+        } catch(err){
+            toast.dismiss()
+            toast.error('Please try after sometime')
+        }
     }
 
     useEffect(() => {
@@ -85,7 +99,8 @@ const Responses = () => {
                 <h1>Responses</h1>
                 <article className="button-stack">
                     <CustomButton title="Click to push to community voting" handleSubmit={redirectVoting} />
-                    <CustomButton title="Click to get API url to integrate" handleSubmit={handlePushToWalrus} />
+                    <CustomButton title="Click to use API or download data " handleSubmit={getOnlineUrl} />
+                    {apiUrl && <p><a href={`https://aggregator-devnet.walrus.space/v1/${apiUrl}`} target="_blank">Generated link</a></p>}
                     <CustomButton title="AI summarizer" handleSubmit={() => { }} />
                 </article>
             </section>
@@ -93,8 +108,8 @@ const Responses = () => {
                 <thead>
                     <tr>
                         {
-                            tableHeading.map((heading) => (
-                                <th>{heading}</th>
+                            tableHeading.map((heading, index) => (
+                                <th key={`heading-${index}`}>{heading}</th>
                             ))
                         }
                     </tr>
@@ -104,8 +119,8 @@ const Responses = () => {
                         responses.map((response) => (
                             <tr>
                                 {
-                                    tableHeading.map((heading) => (
-                                        <td> {response[heading]} </td>
+                                    tableHeading.map((heading, index) => (
+                                        <td key={`responses-${index}`}> {response[heading]} </td>
                                     ))
                                 }
                             </tr>

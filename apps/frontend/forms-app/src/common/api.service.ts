@@ -49,6 +49,15 @@ export const fetchForms = () => {
     })
 }
 
+export const fetchResponseOnWlarus = () => {
+    return fetch(`https://aggregator-devnet.walrus.space/v1/HqvXqv9IQRXovGUIj3IODeJplMNW0kWlIX1P_EHDFtQ`, {
+        method: 'GET',
+        headers:{
+            "Content-Type": "application/json",
+        }
+    })
+}
+
 export const fetchFormById = (id: number) => {
     return fetch(`${API_URL}/form/${id}`, {
         method: 'GET',
@@ -103,4 +112,20 @@ export const updateForms = (data: ObjectProps) => {
         },
         body: JSON.stringify(data),
     })
+}
+
+export const publisherWalrus = (data: unknown) => {
+    const myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify(data);
+
+    const requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+    };
+
+    return fetch("https://publisher-devnet.walrus.space/v1/store", requestOptions)
 }
