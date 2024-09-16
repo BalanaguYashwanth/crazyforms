@@ -34,3 +34,8 @@
     ├── package.json
     └── tsconfig.base.json
 
+# Contracts 
+
+Non EVM - SUI - https://github.com/BalanaguYashwanth/crazyforms_sui
+
+EVM - KiiChain - https://github.com/BalanaguYashwanth/Kiichain-forms-escrow
