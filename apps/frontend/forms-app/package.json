@@ -10,12 +10,14 @@
     "preview": "tsc --noEmitOnError false && vite build && vite preview"
   },
   "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
     "@mysten/dapp-kit": "^0.14.19",
     "@mysten/sui": "^1.8.0",
     "@mysten/sui.js": "^0.54.1",
     "@quillforms/react-renderer-utils": "^5.11.0",
     "@quillforms/renderer-core": "^5.9.0",
     "@react-oauth/google": "^0.12.1",
+    "@solana/web3.js": "^1.95.3",
     "@tanstack/react-query": "^5.55.0",
     "@wallet-standard/app": "^0.0.0-20240703212708",
     "@wallet-standard/standard": "^0.1.0-alpha.5",

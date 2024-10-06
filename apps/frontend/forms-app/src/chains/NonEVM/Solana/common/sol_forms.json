@@ -1,0 +1,129 @@
+{
+  "address": "8jYpZsfT5mP5LC6Fw2GhD8PjXgJHYKkNedeg85tjAvcx",
+  "metadata": {
+    "name": "sol_forms_escrow",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_entry",
+      "discriminator": [
+        248,
+        207,
+        142,
+        242,
+        66,
+        162,
+        150,
+        16
+      ],
+      "accounts": [
+        {
+          "name": "formEntry",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "budget",
+          "type": "u64"
+        },
+        {
+          "name": "cpr",
+          "type": "u64"
+        },
+        {
+          "name": "entry_id",
+          "type": "u64"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "creator",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "reward",
+      "discriminator": [
+        1,
+        189,
+        15,
+        193,
+        243,
+        42,
+        133,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "form_entry",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    
+  ],
+  "types": [
+    {
+      "name": "FormState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cpr",
+            "type": "u64"
+          },
+          {
+            "name": "budget",
+            "type": "u64"
+          },
+          {
+            "name": "entry_id",
+            "type": "u64"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "creator",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
