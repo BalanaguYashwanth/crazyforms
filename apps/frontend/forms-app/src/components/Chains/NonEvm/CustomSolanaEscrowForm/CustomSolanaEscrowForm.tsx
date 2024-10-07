@@ -8,6 +8,9 @@ import { ObjectProps } from "../../../../common/types";
 import * as anchor from "@coral-xyz/anchor";
 
 import { SolFormsEscrow } from "../../../../chains/NonEVM/Solana/common/solFormEscrow";
+import { updateForms } from "../../../../common/api.service";
+import { CHAINS } from "../../../../common/constants";
+import { shortAddress } from "../../../../common/helper";
 
 window.Buffer = Buffer;
 
@@ -15,36 +18,36 @@ window.Buffer = Buffer;
 const idl_string = JSON.stringify(idl)
 const idl_object = JSON.parse(idl_string)
 
-const CustomSolanaEscrowForm = ({ selectedWallet, accounts }: any) => {
+const CustomSolanaEscrowForm = ({ accounts }: any) => {
     const connection = new Connection(clusterApiUrl('devnet'), anchor.AnchorProvider.defaultOptions());
     const { formId, formTitle } = useContext(FormBuilderContext) as unknown as ObjectProps;
     const [form, setForm] = useState({ budget: 0.01, cpr: 0.001, coinAddress: "" });
     const handleSubmit = async () => {
         try {
-
             const provider = new anchor.AnchorProvider(connection, window?.solana, {
                 preflightCommitment: 'processed'
             });
 
             const program = new Program<SolFormsEscrow>(idl_object, provider);
 
-            const campaign = web3.Keypair.generate();
+            const formPublicKey = web3.Keypair.generate();
 
             const tx = await program.methods.createEntry(
                 new BN(Number(form.budget) * web3.LAMPORTS_PER_SOL),
                 new BN(Number(form.budget) * Math.pow(10, 9)),
                 new BN(Number(form.cpr) * Math.pow(10, 9)),
-                new BN(1333),
-                'FORMS',
-                "ffd", //creator
+                new BN(formId),
+                formTitle,
+                shortAddress(5, accounts[0].address.toString()),
             )
             .accounts({
-                formEntry: campaign.publicKey,
+                formEntry: formPublicKey.publicKey,
                 owner: program.provider.publicKey,
             })
-            .signers([campaign])
+            .signers([formPublicKey])
             .rpc()
-            console.log('-----tx--', tx)
+            await updateForms({ id: formId, type: CHAINS.SOLANA, escrowId: formPublicKey.publicKey.toString(), contractAddress: idl_object?.address, transaction: tx })
+            toast.success('success')
         } catch (err) {
             console.error("Error creating entry:", err);
             toast.error("Failed to create escrow entry. See console for details.");

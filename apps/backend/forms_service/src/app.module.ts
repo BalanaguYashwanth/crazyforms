@@ -20,7 +20,7 @@ import { QuestionModule } from './question/question.module';
         type: 'postgres',
         url: configService.get<string>('DB_URL'),
         entities: [join(process.cwd(), 'dist/**/*.entity.js')],
-        synchronize: true,
+        // synchronize: true,
       }),
     }),
     FormModule,

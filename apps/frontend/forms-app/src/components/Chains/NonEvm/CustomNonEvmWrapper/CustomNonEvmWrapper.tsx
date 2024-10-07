@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNonEvmWallet } from "../../../../hooks/useNonEvmWallet";
 import CustomSuiEscrowForm from "../CustomSuiEscrowForm/CustomSuiEscrowForm";
 import CustomSolanaEscrowForm from "../CustomSolanaEscrowForm/CustomSolanaEscrowForm";
+import { CHAINS } from "../../../../common/constants";
 
 const CustomNonEvmWrapper = () => {
     const { wallets, selectedWallet, accounts, connectWallet } = useNonEvmWallet();
@@ -25,8 +26,8 @@ const CustomNonEvmWrapper = () => {
                 ))}
               </select>
             {!chainType && <p>Please connect to wallet</p>}
-            {chainType === 'solana' &&  <CustomSolanaEscrowForm selectedWallet={selectedWallet} accounts={accounts}  /> }
-            {chainType === 'sui' && <CustomSuiEscrowForm selectedWallet={selectedWallet} accounts={accounts}  />}
+            {chainType === (CHAINS.SOLANA).toLocaleLowerCase() &&  <CustomSolanaEscrowForm accounts={accounts}  /> }
+            {chainType === (CHAINS.SUI).toLocaleLowerCase() && <CustomSuiEscrowForm selectedWallet={selectedWallet} accounts={accounts}  />}
         </main>
     )
 }

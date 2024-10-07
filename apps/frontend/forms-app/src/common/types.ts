@@ -41,7 +41,7 @@ export interface QuestionBlockProps {
 }
 
 export interface ObjectProps{
-    [key: string]: string | number;
+    [key: string]: any | string | number;
 }
 
 export interface FormBuilderContextProviderProps {

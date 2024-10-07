@@ -94,7 +94,19 @@
     }
   ],
   "accounts": [
-    
+    {
+      "name": "FormState",
+      "discriminator": [
+        58,
+        23,
+        217,
+        27,
+        4,
+        230,
+        20,
+        75
+      ]
+    }
   ],
   "types": [
     {
