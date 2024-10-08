@@ -72,7 +72,7 @@ const Home = () => {
         <div className="feature">
           <img src={homepageCard3} alt="Real-Time Rewards" />
           <h3>Real-Time Rewards</h3>
-          <p>Send real-time rewards to users based on their interactions and submissions on your platform.</p>
+          <p>Send static or dynamic rewards to users based on their interactions & submissions on your platform.</p>
         </div>
 
         <div className="feature">
@@ -103,7 +103,7 @@ const Home = () => {
 
         <div className="feature">
           <img src={homepageCard2} alt="Marketplace" />
-          <h3>Coupon & giveaways</h3>
+          <h3> Quizzes & Coupons</h3>
           <p>Create copoun or giveways form and enter code unlock rewards</p>
         </div>
 
