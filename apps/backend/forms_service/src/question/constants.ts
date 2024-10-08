@@ -1,6 +1,7 @@
 export const CHAINS = {
   SUI: 'SUI',
   KIICHAIN: 'KIICHAIN',
+  SOLANA: 'SOLANA',
 };
 
 export const KII_CHAIN_RPC_URL =

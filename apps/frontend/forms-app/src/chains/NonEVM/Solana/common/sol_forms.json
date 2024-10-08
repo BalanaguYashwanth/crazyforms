@@ -1,5 +1,5 @@
 {
-  "address": "8jYpZsfT5mP5LC6Fw2GhD8PjXgJHYKkNedeg85tjAvcx",
+  "address": "KzXK3nTcUD6KaG5aBkBmRkMy61un83K8YoQNzv72zqb",
   "metadata": {
     "name": "sol_forms_escrow",
     "version": "0.1.0",
@@ -21,7 +21,7 @@
       ],
       "accounts": [
         {
-          "name": "formEntry",
+          "name": "form_entry",
           "writable": true,
           "signer": true
         },
@@ -31,7 +31,7 @@
           "signer": true
         },
         {
-          "name": "systemProgram",
+          "name": "system_program",
           "address": "11111111111111111111111111111111"
         }
       ],
@@ -81,16 +81,15 @@
         },
         {
           "name": "user",
+          "writable": true
+        },
+        {
+          "name": "owner",
           "writable": true,
           "signer": true
         }
       ],
-      "args": [
-        {
-          "name": "amount",
-          "type": "u64"
-        }
-      ]
+      "args": []
     }
   ],
   "accounts": [

@@ -13,23 +13,20 @@ import { CHAINS } from "../../../../common/constants";
 import { shortAddress } from "../../../../common/helper";
 
 window.Buffer = Buffer;
-
-
 const idl_string = JSON.stringify(idl)
 const idl_object = JSON.parse(idl_string)
 
 const CustomSolanaEscrowForm = ({ accounts }: any) => {
     const connection = new Connection(clusterApiUrl('devnet'), anchor.AnchorProvider.defaultOptions());
+    const provider = new anchor.AnchorProvider(connection, window?.solana, {
+        preflightCommitment: 'processed'
+    });
+    const program = new Program<SolFormsEscrow>(idl_object, provider);
     const { formId, formTitle } = useContext(FormBuilderContext) as unknown as ObjectProps;
     const [form, setForm] = useState({ budget: 0.01, cpr: 0.001, coinAddress: "" });
+
     const handleSubmit = async () => {
         try {
-            const provider = new anchor.AnchorProvider(connection, window?.solana, {
-                preflightCommitment: 'processed'
-            });
-
-            const program = new Program<SolFormsEscrow>(idl_object, provider);
-
             const formPublicKey = web3.Keypair.generate();
 
             const tx = await program.methods.createEntry(
