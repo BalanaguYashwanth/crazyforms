@@ -66,10 +66,23 @@ export interface IntegrationsProps { formId: number, formTitle: string }
 export interface matchQuestionWithAnswersProps{ answers: FormAnswersProp }
 
 export interface UseEVMWalletProps {
+    CHAIN_CONFIG_PARAMS: any;
     CONTRACT_ADDRESS: string;
     CONTRACT_ABI: any; // If you have ABI types, you can be more specific
   }
-  
+
+export interface useEvmConfigWalletProps{
+    type: string
+}
+
+export interface useEvmConfigWalletOuputProps {
+    CHAIN_CONFIG_PARAMS: any,
+    CONTRACT_ADDRESS: string
+    CONTRACT_ABI: any
+}
+
+export interface CustomKiiEscrowFormProps{ chainType: string, contract: any, contractAddress: string ,walletAddress: string }
+
 export interface UseEVMWalletReturn {
     connectEVMWallet: () => Promise<void>;
     contract: Contract | null;

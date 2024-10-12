@@ -1,8 +1,6 @@
 import { ethers } from 'ethers';
-import { KII_CHAIN_RPC_CONFIG, KII_CHAIN_RPC_URL } from '../../constants';
-import * as contractAbi from './abi.json';
 
-export class KiiChainContract {
+export class EvmChainContract {
   private provider: ethers.JsonRpcProvider;
   private contract;
   private wallet;
@@ -11,11 +9,17 @@ export class KiiChainContract {
   private CONTRACT_ABI;
   private WALLET_MNEMONIC;
 
-  constructor() {
-    this.CONTRACT_ADDRESS = process.env.KII_PACKAGE_ID;
-    this.CONTRACT_ABI = contractAbi.abi;
-    this.WALLET_MNEMONIC = process.env.KII_OWNER_MNEMONIC_KEY;
-    this.provider = this.getProvider();
+  constructor({
+    CONTRACT_ABI,
+    CONTRACT_ADDRESS,
+    CHAIN_RPC_URL,
+    CHAIN_RPC_CONFIG,
+    WALLET_MNEMONIC,
+  }) {
+    this.CONTRACT_ADDRESS = CONTRACT_ADDRESS;
+    this.CONTRACT_ABI = CONTRACT_ABI;
+    this.WALLET_MNEMONIC = WALLET_MNEMONIC;
+    this.provider = this.getProvider({ CHAIN_RPC_URL, CHAIN_RPC_CONFIG });
     this.wallet = ethers.Wallet.fromPhrase(this.WALLET_MNEMONIC!);
     this.signer = this.wallet.connect(this.provider);
     this.contract = new ethers.BaseContract(
@@ -25,12 +29,13 @@ export class KiiChainContract {
     );
   }
 
-  getProvider(): ethers.JsonRpcProvider {
-    const provider = new ethers.JsonRpcProvider(
-      KII_CHAIN_RPC_URL,
-      KII_CHAIN_RPC_CONFIG,
-    );
-    return provider;
+  getProvider({ CHAIN_RPC_URL, CHAIN_RPC_CONFIG }): ethers.JsonRpcProvider {
+    try {
+      const provider = new ethers.JsonRpcProvider(CHAIN_RPC_URL);
+      return provider;
+    } catch (err) {
+      console.log('GetProvider error', err);
+    }
   }
 
   async reward(props: { receiverAddress: string; escrowId: number }) {

@@ -85,6 +85,7 @@ export class QuestionService {
       }
       return this.answerRepository.save(answers);
     } catch (error) {
+      console.log('Failed to create asnwer error: ', error);
       if (error instanceof Error) {
         throw new HttpException(
           'Failed to create answers',

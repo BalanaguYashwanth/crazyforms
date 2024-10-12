@@ -1,9 +1,9 @@
 import { ethers, BrowserProvider, JsonRpcSigner, Contract } from 'ethers';
 import { useState } from 'react';
-import { KII_CHAIN_PARAMS } from '../common/constants';
 import { UseEVMWalletProps, UseEVMWalletReturn } from '../common/types';
 
 export const useEVMWallet = ({
+  CHAIN_CONFIG_PARAMS,
   CONTRACT_ADDRESS,
   CONTRACT_ABI,
 }: UseEVMWalletProps): UseEVMWalletReturn => {
@@ -21,7 +21,7 @@ export const useEVMWallet = ({
 
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
-          params: [KII_CHAIN_PARAMS],
+          params: [CHAIN_CONFIG_PARAMS],
         });
 
         const provider = new ethers.BrowserProvider(window.ethereum);

@@ -1,20 +1,14 @@
 import { ethers } from 'ethers';
-import { KII_CHAIN_RPC_CONFIG, KII_CHAIN_RPC_URL } from '../../../../common/constants';
+import { ObjectProps } from '../../../common/types';
 
-export class KiiFormsEscrowRespository {
+export class EvmFormsEscrowRespository {
     private contract: ethers.Contract;
 
     constructor(contract: ethers.Contract){
         this.contract = contract;
     }
 
-    getProvider(): ethers.JsonRpcProvider {
-        const url = KII_CHAIN_RPC_URL;
-        const provider = new ethers.JsonRpcProvider(url, KII_CHAIN_RPC_CONFIG);
-        return provider;
-    }
-
-    async create(props: any) {
+    async create(props: ObjectProps) {
         try{
             const budgetWeiValue = ethers.parseEther((props.budget).toString())
             const cprWei =  ethers.parseEther((props.cpr).toString())

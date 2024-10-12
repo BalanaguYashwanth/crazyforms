@@ -1,14 +1,12 @@
 import { useContext, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { KII_CHAIN_CONTRACT_ADDRESS } from "../../../../common/config";
-import { ObjectProps } from "../../../../common/types";
-import { FormBuilderContext } from "../../../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
+import { CustomKiiEscrowFormProps, ObjectProps } from "../../../../common/types";
 import { updateForms } from "../../../../common/api.service";
-import { CHAINS } from "../../../../common/constants";
-import { KiiFormsEscrowRespository } from "../../../../chains/EVM/KiiChain/Infrastructure/KiiFormsEscrowRespository";
+import { FormBuilderContext } from "../../../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
+import { EvmFormsEscrowRespository } from "../../../../chains/EVM/Infrastructure/EvmFormsEscrowRespository";
 import { generateRandomAddress } from "../../../../common/helper";
 
-const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
+const CustomEvmEscrowForm = ({ chainType, contract, contractAddress ,walletAddress }: CustomKiiEscrowFormProps) => {
     const initalForm = { budget: 0, cpr: 0, coinAddress: "" }
     const { formId, formTitle } = useContext(FormBuilderContext) as unknown as ObjectProps;
     const [escrowId, setEscrowId] = useState('');
@@ -35,12 +33,12 @@ const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
                 startDate: 222,
                 funds_to_distribute: form.budget,
                 creator: walletAddress,
-                contractAddress: KII_CHAIN_CONTRACT_ADDRESS,
+                contractAddress,
                 escrowId,
             };
-            const escrowRef = new KiiFormsEscrowRespository(contract);
+            const escrowRef = new EvmFormsEscrowRespository(contract);
             await escrowRef.create(escrowParams);
-            await updateForms({ id: formId, type: CHAINS.KIICHAIN, escrowId, contractAddress: KII_CHAIN_CONTRACT_ADDRESS })
+            await updateForms({ id: formId, type: chainType, escrowId, contractAddress })
             setEscrowId(escrowId)
             toast.dismiss();
             toast.success('success')
@@ -68,4 +66,4 @@ const CustomKiiEscrowForm = ({ contract, walletAddress }: any) => {
     )
 }
 
-export default CustomKiiEscrowForm;
+export default CustomEvmEscrowForm;

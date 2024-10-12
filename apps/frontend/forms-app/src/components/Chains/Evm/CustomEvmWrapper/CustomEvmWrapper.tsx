@@ -1,19 +1,28 @@
-import { KII_CHAIN_CONTRACT_ADDRESS } from "../../../../common/config";
+import { useState } from "react";
 import { useEVMWallet } from "../../../../hooks/useEvmWallet";
-import KIICHAIN_CONTRACT_ABI from '../../../../chains/EVM/KiiChain/common/abi.json'
-import CustomKiiEscrowForm from "../CustomKiiEscrowForm/CustomKiiEscrowForm";
+
+import { CHAINS } from "../../../../common/constants";
+import useEvmConfigWallet from "../../../../hooks/useEvmConfigWallet";
+import CustomEvmEscrowForm from "../CustomEvmEscrowForm/CustomEvmEscrowForm";
 
 const CustomEvmWrapper = () => {
-
-    const { connectEVMWallet, contract, provider, signer, walletAddress } = useEVMWallet({ CONTRACT_ADDRESS: KII_CHAIN_CONTRACT_ADDRESS, CONTRACT_ABI: KIICHAIN_CONTRACT_ABI.abi });
+    const [selectedWallet, setSelectedWallet] = useState(CHAINS.BASE);
+    const { CHAIN_CONFIG_PARAMS, CONTRACT_ADDRESS, CONTRACT_ABI  } = useEvmConfigWallet({type: selectedWallet})
+    const { connectEVMWallet, contract, walletAddress } = useEVMWallet({ CHAIN_CONFIG_PARAMS, CONTRACT_ADDRESS, CONTRACT_ABI });
 
     return (
         <main>
+            <select onChange={(e)=>setSelectedWallet(e.target.value)}>
+                <option value={''}> Select EVM Chain</option>
+                <option value={CHAINS.BASE}> BASE </option>
+                <option value={CHAINS.KIICHAIN}> KIICHAIN </option>
+            </select>
+            <br/>
             {walletAddress ? <p>connected -  {walletAddress}</p> : <button onClick={connectEVMWallet}>Connect Wallet</button>}
-            <CustomKiiEscrowForm
+            <CustomEvmEscrowForm
+                chainType={selectedWallet}
                 contract={contract}
-                provider={provider}
-                signer={signer}
+                contractAddress={CONTRACT_ADDRESS}
                 walletAddress={walletAddress}
             />
         </main>

@@ -1,4 +1,4 @@
-export class KiiFormsEscrow {
+export class EvmFormsEscrow {
     constructor(
             public formId: string, 
             public budget:number, 
