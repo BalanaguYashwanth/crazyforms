@@ -38,6 +38,8 @@
 
 Non EVM
 
+- Aptos - https://github.com/BalanaguYashwanth/apt_forms_escrow
+
 - Solana - https://github.com/BalanaguYashwanth/sol_escrow_form
 
 - SUI - https://github.com/BalanaguYashwanth/crazyforms_sui
