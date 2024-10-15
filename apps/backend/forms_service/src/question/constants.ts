@@ -3,6 +3,7 @@ export const CHAINS = {
   KIICHAIN: 'KIICHAIN',
   SUI: 'SUI',
   SOLANA: 'SOLANA',
+  APTOS: 'APTOS',
 };
 
 export const EVM_CHAIN_RPC = {

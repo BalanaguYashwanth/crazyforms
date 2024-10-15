@@ -73,15 +73,17 @@ export class QuestionService {
     chainType,
     escrowId,
     receiverAddress,
+    formId,
   }: {
     answers: CreateAnswerDto[];
     chainType: string;
     escrowId: string;
     receiverAddress: string;
+    formId: string;
   }) {
     try {
       if (escrowId && receiverAddress && chainType) {
-        await triggerRewards({ escrowId, receiverAddress, chainType });
+        await triggerRewards({ escrowId, receiverAddress, chainType, formId });
       }
       return this.answerRepository.save(answers);
     } catch (error) {

@@ -23,13 +23,7 @@ export class QuestionController {
 
   @Post('answers')
   createAnswers(@Body() data: any) {
-    const { answers, chainType, escrowId, receiverAddress } = data;
-    return this.questionService.createAnswers({
-      answers,
-      chainType,
-      escrowId,
-      receiverAddress,
-    });
+    return this.questionService.createAnswers(data);
   }
 
   @Get()

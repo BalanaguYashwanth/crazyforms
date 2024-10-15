@@ -26,7 +26,7 @@ const ViewForm = () => {
     const fetchFormDetails = async () => {
         const dataPromise = await fetchFormById(formId)
         const data = await dataPromise.json()
-        return { escrowId: data[0]?.escrow?.escrowId, chainType: data[0]?.escrow?.type };
+        return { escrowId: data[0]?.escrow?.escrowId, chainType: data[0]?.escrow?.type, escrowFormId: data[0]?.escrow?.id };
     }
 
     const matchQuestionWithAnswers = async ({ answers }: matchQuestionWithAnswersProps) => {
@@ -49,7 +49,7 @@ const ViewForm = () => {
 
     const handleSubmit = async (data: { answers: FormAnswersProp; }) => {
         try {
-            const { escrowId, chainType } = await fetchFormDetails()
+            const { escrowId, chainType, escrowFormId } = await fetchFormDetails()
             let receiverAddress = null;
             if (chainType && escrowId) {
                 receiverAddress = window.prompt(`To receieve rewards - Enter your ${chainType} wallet address`) || '';
@@ -57,7 +57,7 @@ const ViewForm = () => {
             if (data?.answers) {
                 toast.loading('Loading');
                 const answers = await matchQuestionWithAnswers({ answers: data.answers })
-                await createAnswers({ answers, receiverAddress, escrowId, chainType });
+                await createAnswers({ answers, receiverAddress, escrowId, chainType, formId: escrowFormId });
                 toast.dismiss();
                 toast.success((escrowId && receiverAddress) ? 'Successfully recieved rewards, please check your wallet' : 'Successfully Submitted')
             } else {

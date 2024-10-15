@@ -1,7 +1,9 @@
 import { useState } from "react";
 // @ts-expect-error: Import not typed correctly
 import { registerCoreBlocks } from "@quillforms/react-renderer-utils";
-import { choiceItemBlock, choicesBlock, newContentBlockObject } from "../../common/constants";
+import { PetraWallet } from "petra-plugin-wallet-adapter";
+import { AptosWalletAdapterProvider } from "@aptos-labs/wallet-adapter-react";
+import { MartianWallet } from "@martianwallet/aptos-wallet-adapter";import { choiceItemBlock, choicesBlock, newContentBlockObject } from "../../common/constants";
 import { handleChangeContentProps, handleRadioBoxProps } from "../../common/types";
 import { FormBuilderContextProvider } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
 import FormBuilder from "../../components/FormBuilder/FormBuilder";
@@ -9,6 +11,7 @@ import CustomTypeForm from "../../components/CustomTypeForm/CustomTypeForm";
 import './EditForm.scss'
 import "@quillforms/renderer-core/build-style/style.css";
 registerCoreBlocks()
+const aptosWallets = [new MartianWallet(), new PetraWallet()];
 
 const EditForm = () => {
   const [currentBlockIndex, setCurrentBlockIndex] = useState(0);
@@ -63,6 +66,7 @@ const EditForm = () => {
   return (
     <main className="form-container">
       <section className="left-block">
+      <AptosWalletAdapterProvider plugins={aptosWallets} autoConnect={true}>
         <FormBuilderContextProvider value={{
           addContentBlock,
           addChoiceBlock,
@@ -74,6 +78,7 @@ const EditForm = () => {
         }}>
           <FormBuilder />
         </FormBuilderContextProvider>
+        </AptosWalletAdapterProvider>
       </section>
       <section className="right-block">
         <CustomTypeForm
