@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useNonEvmWallet } from "../../../../hooks/useNonEvmWallet";
 import CustomSuiEscrowForm from "../CustomSuiEscrowForm/CustomSuiEscrowForm";
 import CustomSolanaEscrowForm from "../CustomSolanaEscrowForm/CustomSolanaEscrowForm";
+import CustomAptosEscrowForm from "../CustomAptosEscrowForm/CustomAptosEscrowForm";
 import { CHAINS } from "../../../../common/constants";
+import "@aptos-labs/wallet-adapter-ant-design/dist/index.css";
 
 const CustomNonEvmWrapper = () => {
     const { wallets, selectedWallet, accounts, connectWallet } = useNonEvmWallet();
@@ -25,9 +27,10 @@ const CustomNonEvmWrapper = () => {
                   </option>
                 ))}
               </select>
-            {!chainType && <p>Please connect to wallet</p>}
             {chainType === (CHAINS.SOLANA).toLocaleLowerCase() &&  <CustomSolanaEscrowForm accounts={accounts}  /> }
             {chainType === (CHAINS.SUI).toLocaleLowerCase() && <CustomSuiEscrowForm selectedWallet={selectedWallet} accounts={accounts}  />}
+            {chainType === (CHAINS.APTOS).toLocaleLowerCase() && <CustomAptosEscrowForm />}
+            {!chainType && <p>Please connect to wallet</p>}
         </main>
     )
 }

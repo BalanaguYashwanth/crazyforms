@@ -28,7 +28,6 @@ const CustomSolanaEscrowForm = ({ accounts }: any) => {
     const handleSubmit = async () => {
         try {
             const formPublicKey = web3.Keypair.generate();
-
             const tx = await program.methods.createEntry(
                 new BN(Number(form.budget) * web3.LAMPORTS_PER_SOL),
                 new BN(Number(form.budget) * Math.pow(10, 9)),

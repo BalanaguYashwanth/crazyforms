@@ -4,11 +4,13 @@ import { CHAINS, EVM_CHAIN_RPC_CONFIG, EVM_CHAIN_RPC } from '../constants';
 import { EvmChainContract } from '../contracts/EvmChain/EvmChainContract';
 import { SolanaContract } from '../contracts/Solana/SolanaContract';
 import { SUIContract } from '../contracts/suiContract';
+import { AptosContract } from '../contracts/aptosContract';
 
 export const triggerRewards = async ({
   escrowId,
   receiverAddress,
   chainType,
+  formId,
 }) => {
   try {
     if (chainType === CHAINS.SUI) {
@@ -37,6 +39,9 @@ export const triggerRewards = async ({
     } else if (chainType == CHAINS.SOLANA) {
       const solanaContract = new SolanaContract();
       await solanaContract.reward({ escrowId, receiverAddress });
+    } else if (chainType == CHAINS.APTOS) {
+      const aptosContract = new AptosContract();
+      aptosContract.reward({ escrowId, formId, receiverAddress });
     }
   } catch (error) {
     throw new Error(error);
