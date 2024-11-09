@@ -196,3 +196,8 @@ export const BASE_CHAIN_PARAMS = {
   },
   blockExplorerUrls: ['https://sepolia-explorer.base.org'],
 };
+
+export const IMAGE = {
+  USER:'https://firebasestorage.googleapis.com/v0/b/communityhouse-b50a0.appspot.com/o/user-profile.jpeg?alt=media',
+  AGENT:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiBhsuDNp8EglLJoYR3EOh7C1yJp88c2Tat6-2Hz6aA5lCQFlkSDQ9AdofcTyvtBDnUD0&usqp=CAU'
+}

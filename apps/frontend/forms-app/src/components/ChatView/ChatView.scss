@@ -1,0 +1,36 @@
+.chatContainer {
+    width: 800px;
+    margin: auto;
+
+    .chatSection {
+        display: flex;
+        width: 100%;
+    }
+
+    input {
+        width: 100%;
+
+    }
+
+    .innerSpacing {
+        padding: 5px;
+    }
+
+    .chatBody {
+        height: 80vh;
+        overflow: scroll;
+        padding: 0px 100px;
+
+        * {
+            padding: 5px;
+        }
+    }
+
+    .flex-between {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+
+}
