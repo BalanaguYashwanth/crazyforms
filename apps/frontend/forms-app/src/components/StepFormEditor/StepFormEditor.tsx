@@ -4,6 +4,7 @@ import Choices from "../Choices/Choices";
 import { StepFormEditorProps } from "../../common/types";
 import { FormBuilderContext } from "../../common/centralizeStore/FormBuilderContext/FormBuilderContext";
 import { createForms, createOrUpdateQuestions } from "../../common/api.service";
+import { BLOCK_TYPE } from "../../common/constants";
 import './StepFormEditor.scss'
 
 const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorProps) => {
@@ -82,13 +83,16 @@ const StepFormEditor = ({ handleSetFormId, handleSetFormTitle }: StepFormEditorP
                             <div>
                                 <select onChange={(e)=>handleInputBlockType(e.target.value)}>
                                     <option value="">
-                                        select box
+                                        Select Option
                                     </option>
-                                    <option value="inputBox">
-                                        Input Box
+                                    <option value={BLOCK_TYPE.INPUT_BLOCK}>
+                                        Input
                                     </option>
-                                    <option value="choiceBox">
-                                        Choice Box
+                                    <option value={BLOCK_TYPE.CHOICE_BLOCK}>
+                                        Choice
+                                    </option>
+                                    <option value={BLOCK_TYPE.FILE_UPLOAD_BLOCK}>
+                                        FileUpload
                                     </option>
                                 </select>
                                 {index == contentBlock.length - 1 && <button className='add-button' onClick={addContentBlock}>+</button>}

@@ -109,6 +109,12 @@ export const blocks = [
     }
   ]
 
+export enum BLOCK_TYPE {
+  INPUT_BLOCK,
+  CHOICE_BLOCK,
+  FILE_UPLOAD_BLOCK
+}
+
 export const newContentBlockObject = {
     blockKey: 0,
     name: "short-text",
@@ -146,6 +152,19 @@ export const choiceItemBlock = {
   id: 0,
   label: "text1",
   value: "text1"
+}
+
+export const fileUploadBlock = {
+  name: "file-upload",
+  id: "kd12edg",
+  attributes: {
+    label: "Please upload an image only!",
+    description:
+      "This is just an example. You have to go to folder 'file-block' then open display.js and replace the value of YOUR_SERVER_URL constant and you should handle the live upload from your backend.",
+    required: true,
+    allowedFileExtensions: "pdf, jpg, jpeg, png, webp",
+    maxFileSize: 5
+  }
 }
 
 export const REDIRECTION_ROUTES = {
