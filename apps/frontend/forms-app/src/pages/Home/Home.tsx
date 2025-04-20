@@ -46,12 +46,6 @@ const Home = () => {
     <main className='home-container' style={{ backgroundImage: `url(${banner}`, backgroundSize: 'content' }}>
       <h1>FormPilot: Streamline Your Workflow</h1>
 
-      <b style={{ color: '#e1d8bc' }}>Explore by Zklogin</b>
-      <GoogleLogin onSuccess={handleSuccessLogin} onError={handleErrorLogin}
-        text="continue_with"
-        shape="circle"
-        theme="filled_black" />
-
       <div className="features-section">
 
 
@@ -87,12 +81,6 @@ const Home = () => {
           <p>Create polls for users to vote on and gather their opinions on important topics.</p>
         </div>
 
-        <div className="feature">
-          <img src={homepageCard6} alt="Instant Airdrops" />
-          <h3>Instant Airdrops</h3>
-          <p>Distribute tokens as airdrops to users who submit forms, incentivizing participation.</p>
-        </div>
-
         <Link target='_blank' to={REDIRECTION_ROUTES.MARKETPLACE}>
           <div className="feature">
             <img src={homepageCard7} alt="Marketplace" />
@@ -110,15 +98,12 @@ const Home = () => {
         <div className="feature">
           <img src={homepageCard3} alt="Marketplace" />
           <h3>Multi chain</h3>
-          <p>Supports ride range of blockchains from Evm to Non Evm chains</p>
+          <p>Supports ride range of AI & blockchains</p>
         </div>
       </div>
 
-
-
-
       <footer className="footer">
-        <p>© 2024 FormPilot. All rights reserved.</p>
+        <p>© 2025 <a href='https://www.linkedin.com/company/cognito-innovations'><u>Cognito</u></a>. All rights reserved.</p>
       </footer>
     </main>
   );
