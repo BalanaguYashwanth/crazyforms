@@ -81,11 +81,11 @@ const Home = () => {
           <p>Create polls for users to vote on and gather their opinions on important topics.</p>
         </div>
 
-        <Link target='_blank' to={REDIRECTION_ROUTES.MARKETPLACE}>
+        <Link target='_blank' to={'/'}>
           <div className="feature">
             <img src={homepageCard7} alt="Marketplace" />
             <h3>Marketplace</h3>
-            <p>Explore paid and unpaid forms in the marketplace to fill out and earn rewards.</p>
+            <p>Explore paid and unpaid forms in the marketplace to fill out and earn and share rewards with family and friends by exploring.</p>
           </div>
         </Link>
 
@@ -97,8 +97,8 @@ const Home = () => {
 
         <div className="feature">
           <img src={homepageCard3} alt="Marketplace" />
-          <h3>Multi chain</h3>
-          <p>Supports ride range of AI & blockchains</p>
+          <h3>Agents</h3>
+          <p>Supports ride range of AI Agents</p>
         </div>
       </div>
 
