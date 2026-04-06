@@ -1,5 +1,6 @@
-import { API_URL } from "./config"
-import { ObjectProps } from "./types"
+import Together from 'together-ai';
+import { API_URL, TOGETHER_API_KEY } from "./config"
+import { JsonProps, MessageProps, ObjectProps } from "./types"
 
 export const createOrUpdateQuestions = (data: unknown) => {
     return fetch(`${API_URL}/question`, {
@@ -114,6 +115,15 @@ export const updateForms = (data: ObjectProps) => {
     })
 }
 
+export const fetchMessageAgent = async (messages: MessageProps[]) => {
+    const together = new Together({ apiKey: TOGETHER_API_KEY })
+    const completion = await together.chat.completions.create({
+        model: 'meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo',
+        messages,
+    })
+    return (completion?.choices[0]?.message?.content)
+}
+
 export const publisherWalrus = (data: unknown) => {
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -121,11 +131,11 @@ export const publisherWalrus = (data: unknown) => {
     const raw = JSON.stringify(data);
 
     const requestOptions = {
-    method: "PUT",
-    headers: myHeaders,
-    body: raw,
-    redirect: "follow"
+        method: "PUT",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow"
     };
 
-    return fetch("https://publisher-devnet.walrus.space/v1/store", requestOptions)
+    return fetch("https://publisher-devnet.walrus.space/v1/store", requestOptions as JsonProps)
 }

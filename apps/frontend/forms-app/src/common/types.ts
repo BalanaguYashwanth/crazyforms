@@ -96,3 +96,51 @@ declare global {
       ethereum?: any;
     }
   }
+
+export interface TabJson {
+    id: number,
+    header: string,
+    component: ReactNode
+}
+
+export interface ChatProps {
+    id: number,
+    user: string,
+    agent: string,
+}
+
+type Message = "system" | "user"
+
+export interface MessageProps{
+    role: Message, 
+    content: string
+}
+
+export interface JsonProps{
+    [key: string]: string | Headers
+}
+
+export interface ChatMessageProps{ 
+    alt: string,
+    message: string,
+    url: string,
+}
+
+export interface QuestionArrProps{
+    label: string,
+    questionId: string,
+}
+
+export interface ResponseArrProps{
+    user: {
+        [key: string]: string
+    },
+    answer: JsonProps,
+    question: JsonProps
+}
+
+export interface TabData {
+    id: number;
+    header: string;
+    component: JSX.Element;
+}
